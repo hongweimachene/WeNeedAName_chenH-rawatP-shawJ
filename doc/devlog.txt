@@ -1,3 +1,7 @@
-WeNeedAName
-Hong Wei Chen, Pratham Rawat, Jackson Shaw, Yifan Wang
-Softdev pd1 
+Team mapp: Hong Wei Chen, Pratham Rawat, Justin Shaw, Yifan Wang
+SoftDev1 pd1
+P00 -- ArRESTed Development
+2019-11-17
+
+prathamR -- 2019-11-17 09:58
+Add devlog updating script and doc folder
