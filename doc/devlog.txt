@@ -8,3 +8,9 @@ Add devlog updating script and doc folder
 
 prathamR -- 2019-11-17 10:03
 Add app.py file
+
+prathamR -- 2019-11-17 10:11
+Test fixed update log
+
+prathamR -- 2019-11-17 10:13
+Test updateLog part 2
