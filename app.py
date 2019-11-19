@@ -18,8 +18,11 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def loggingIn():
-    print("yeet")
-    return render_template("start.html");
+    return "hello";
+
+@app.route("/auth")
+def login():
+    return "Login please";
 
 if __name__ == "__main__":
 	app.debug = True
