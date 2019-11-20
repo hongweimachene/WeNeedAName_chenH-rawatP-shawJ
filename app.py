@@ -10,8 +10,8 @@ import db
 
 app = Flask(__name__)
 
-db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
-c = db.cursor()
+# db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
+# c = db.cursor()
 
 app.secret_key = os.urandom(32)
 #b# ========================================================================
@@ -32,7 +32,7 @@ def login():
 def create():
     return render_template("createAccount.html");
 
-@app.route("/createAccount", methods=["POST"]):
+@app.route("/createAccount", methods=["POST"])
 def createAccount():
     return redirect("/welcome")
 
@@ -40,8 +40,10 @@ def createAccount():
 def authenticate():
     #Getting data inputting in login form
     username = request.form["username"]
-    password = request.form["password"]
+    password = request.form["pass"]
     #Getting username from database
+    db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
+    c = db.cursor()
     c.execute("""SELECT users.username FROM users WHERE username = '{}';""".format(username))
     data = c.fetchall()
     if(len(data) == 0):
@@ -65,16 +67,16 @@ def welcomePage():
     return render_template("welcome.html")
 
 @app.route("/logout")
-def logout()
+def logout():
+    if("username" in session):
+        session.pop["username"]
+        flash("Successfully Logged Out")
+    return redirect("/login")
 
 if __name__ == "__main__":
-    c.execute("""CREATE TABLE IF NOT EXISTS 'users' (userID INT PRIMARY KEY,
-                                                     username STRING,
-                                                     password STRING,
-                                                     name STRING,
-                                                     dob TIMESTAMP,
-                                                     email STRING,
-                                                     phone_number STRING,
-                                                     bio STRING)""")
-	app.debug = True
-	app.run()
+    db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
+    c = db.cursor()
+    c.execute("""CREATE TABLE IF NOT EXISTS 'users' (userID INT PRIMARY KEY, username STRING, password STRING, name STRING, dob TIMESTAMP, email STRING, phone_number STRING, bio STRING, horoscope_info STRING)""")
+    db.close()
+    app.debug = True
+    app.run()
