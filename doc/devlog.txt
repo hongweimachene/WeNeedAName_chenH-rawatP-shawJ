@@ -18,5 +18,8 @@ Test updateLog part 2
 prathamR -- 2019-11-18 08:08
 Add print statement
 
+chenH -- 2019-11-19 06:00
+Updated design doc with APIs and their descriptions
+
 prathamR -- 2019-11-19 08:09
 Add basic login page
