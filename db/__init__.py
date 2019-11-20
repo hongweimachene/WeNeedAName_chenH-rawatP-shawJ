@@ -9,9 +9,9 @@ def db_ex(cmd):
     db.commit()
 
 def db_setup():
-    db_ex("DROP TABLE IF EXISTS \"users\"")
-    db_ex("DROP TABLE IF EXISTS \"requests\"")
-    db_ex("""CREATE TABLE IF NOT EXISTS 'users'
+    db_ex("DROP TABLE IF EXISTS \"user\"")
+    db_ex("DROP TABLE IF EXISTS \"request\"")
+    db_ex("""CREATE TABLE IF NOT EXISTS 'user'
              (id INT PRIMARY KEY,
              username VARCHAR,
              password VARCHAR,
@@ -21,7 +21,7 @@ def db_setup():
              phone_number VARCHAR,
              bio VARCHAR,
              horoscope_info VARCHAR);""")
-    db_ex("""CREATE TABLE IF NOT EXISTS 'requests'
+    db_ex("""CREATE TABLE IF NOT EXISTS 'request'
              (request_id INT PRIMARY KEY,
              sender_id INT,
              reciever_id INT,
