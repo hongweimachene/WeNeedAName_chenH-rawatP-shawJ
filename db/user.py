@@ -1,9 +1,9 @@
-import db
+from db import db_ex
 
 class User:
-    def init__(self, id):
-        table_entry = db.db_ex(f"SELECT * FROM 'user' WHERE 'user'.id={id}").fetchall()
-        if len(table_entry) > 0:
+    def __init__(self, id):
+        table_entry = db_ex(f"SELECT * FROM 'user' WHERE 'user'.id=\"{id}\";").fetchall()
+        if len(table_entry) <= 0:
             raise ValueError("You tried to create a user object with an id that is not in the user table")
         else:
             self.id = id
@@ -17,6 +17,10 @@ class User:
             self.horoscope_info = table_entry[0][8]
 
     @staticmethod
-    def new_user(self, username, name, password, name, dob, email, phone_number, bio, horoscope_info):
-        db.db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
-                 VALUES ({username}, {password}, {name}, {dob}, {email}, {phone_number}, {bio}, {horoscope_info});""")
+    def new_user(username, password, name, dob, email, phone_number, bio, horoscope_info):
+        db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
+                 VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
+                 \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+    @staticmethod
+    def get_by_username(username):
+        return db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()[0][0]

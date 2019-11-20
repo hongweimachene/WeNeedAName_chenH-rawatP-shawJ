@@ -7,6 +7,7 @@ from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
 import datetime
 import db
+from db.user import User
 
 app = Flask(__name__)
 
@@ -76,4 +77,8 @@ def logout():
 if __name__ == "__main__":
     db.db_setup()
     app.debug = True
+    User.new_user("test_username", "test_password", "test_name", "test_dob", "test_email",
+                "test_phone_number", "test_bio", "test_horoscope_info")
+    print(User.get_by_username("test_username")) #should print user id of that username
+    print(User(1).name) #creates a new user object by id
     app.run()
