@@ -15,11 +15,16 @@ Test fixed update log
 prathamR -- 2019-11-17 10:13
 Test updateLog part 2
 
+chenH -- 2019-11-17 22:30
+Uploaded first version of design doc
+
 prathamR -- 2019-11-18 08:08
 Add print statement
 
-chenH -- 2019-11-19 06:00
-Updated design doc with APIs and their descriptions
-
 prathamR -- 2019-11-19 08:09
 Add basic login page
+
+chenH -- 2019-11-19 18:00
+Updated design doc with APIs and their descriptions
+
+
