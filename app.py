@@ -74,9 +74,6 @@ def logout():
     return redirect("/login")
 
 if __name__ == "__main__":
-    db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
-    c = db.cursor()
-    c.execute("""CREATE TABLE IF NOT EXISTS 'users' (userID INT PRIMARY KEY, username STRING, password STRING, name STRING, dob TIMESTAMP, email STRING, phone_number STRING, bio STRING, horoscope_info STRING)""")
-    db.close()
+    db.db_setup()
     app.debug = True
     app.run()
