@@ -33,7 +33,7 @@ def create():
 
 @app.route("/createAccount", methods=["POST"]):
 def createAccount():
-    return ""
+    return redirect("/welcome")
 
 @app.route("/auth", methods=["POST"])
 def authenticate():
