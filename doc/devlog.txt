@@ -35,3 +35,6 @@ Add redirect when creating account
 
 prathamR -- 2019-11-20 08:29
 Fix errors with database, and begin work on createAccounts page
+
+yifanW -- 2019-11-20 08:11
+updated login html
