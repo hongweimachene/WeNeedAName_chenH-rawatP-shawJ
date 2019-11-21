@@ -6,8 +6,8 @@
 from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
 import datetime
-import db
-from db.user import User
+import util
+from util.user import User
 
 app = Flask(__name__)
 
@@ -35,6 +35,14 @@ def create():
 
 @app.route("/createAccount", methods=["POST"])
 def createAccount():
+    if(request.form["password"] != request.form["password-confirm"]):
+        return redirect("/create")
+    try:
+        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet")
+    except:
+        flash("Username already exists")
+        return redirect("/create")
+    # TODO: integrate API for horoscope data
     return redirect("/welcome")
 
 @app.route("/auth", methods=["POST"])

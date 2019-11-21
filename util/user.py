@@ -1,4 +1,4 @@
-from db import db_ex
+from util import db_ex
 
 class User:
     def __init__(self, id):
