@@ -16,10 +16,10 @@ Moon Phase API:
 
 Instructions:
 To clone repo, use 
-git clone git@github.com:hongweimachene/softdev_p01.git
+git clone git@github.com:hongweimachene/softdev_p01.git  
 
-To install the required packages, type in the terminal:
-$pip install -r <path to file>/requirements.txt
+To install the required packages, type in the terminal:      
+$pip install -r <path to file>/requirements.txt     
  
-To run, type in command line
-python3 app.py
+To run, type in command line     
+python3 app.py     
