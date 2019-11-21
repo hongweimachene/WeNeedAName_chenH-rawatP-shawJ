@@ -59,3 +59,6 @@ Actually fix login, as well as logout
 
 prathamR -- 2019-11-21 08:26
 Fix login, and logout
+
+prathamR -- 2019-11-21 08:41
+Remove test thing

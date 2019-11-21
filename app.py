@@ -95,11 +95,6 @@ def logout():
         flash("Successfully Logged Out")
     return redirect("/login")
 
-@app.route("/login_test")
-@login_required
-def login_test():
-    return "works"
-
 if __name__ == "__main__":
     util.db_setup()
     app.debug = True
