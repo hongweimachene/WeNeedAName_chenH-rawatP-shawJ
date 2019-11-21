@@ -8,6 +8,7 @@ import sqlite3, os
 import datetime
 import db
 from db.user import User
+from login_tool import login_required
 
 app = Flask(__name__)
 
@@ -61,6 +62,8 @@ def authenticate():
             return redirect("/login")
     #Passed all checks, good to login
     session["username"] = username
+    if ("prev_url" in session):
+        return redirect(session.pop["prev_url"])
     return redirect("/welcome");
 
 @app.route("/welcome")
@@ -73,6 +76,11 @@ def logout():
         session.pop["username"]
         flash("Successfully Logged Out")
     return redirect("/login")
+
+@app.route("/login_test")
+@login_required
+def login_test():
+    return "works"
 
 if __name__ == "__main__":
     db.db_setup()
