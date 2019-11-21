@@ -51,6 +51,8 @@ def createAccount():
         return redirect("/create")
     # TODO: integrate API for horoscope data
     session["username"] = request.form["username"]
+    if ("prev_url" in session):
+        return redirect(session.pop("prev_url"))
     return redirect("/welcome")
 
 @app.route("/auth", methods=["POST"])
