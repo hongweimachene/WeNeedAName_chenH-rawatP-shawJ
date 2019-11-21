@@ -6,9 +6,10 @@
 from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
 import datetime
-import db
-from db.user import User
+import util
+from util.user import User
 from login_tool import login_required
+
 
 app = Flask(__name__)
 
@@ -30,12 +31,26 @@ def start():
 def login():
     return render_template("login.html")
 
-@app.route("/create")
+@app.route("/create", methods=["GET", "POST"])
 def create():
-    return render_template("createAccount.html");
+    return render_template("createAccounts.html");
 
-@app.route("/createAccount", methods=["POST"])
+@app.route("/createAccount", methods=["GET", "POST"])
 def createAccount():
+    if(request.form["password"] != request.form["password-confirm"]):
+        return redirect("/create")
+    for data in request.form:
+        if(len(request.form[data]) == 0):
+            print("bad")
+            flash("Please submit each request")
+            return redirect("/create")
+    try:
+        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet")
+    except:
+        flash("Username already exists")
+        return redirect("/create")
+    # TODO: integrate API for horoscope data
+    session["username"] = request.form["username"]
     return redirect("/welcome")
 
 @app.route("/auth", methods=["POST"])
@@ -46,7 +61,7 @@ def authenticate():
     #Getting username from database
     db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
     c = db.cursor()
-    c.execute("""SELECT users.username FROM users WHERE username = '{}';""".format(username))
+    c.execute("""SELECT user.username FROM user WHERE username = '{}';""".format(username))
     data = c.fetchall()
     if(len(data) == 0):
         #Checks if username is in database
@@ -54,7 +69,7 @@ def authenticate():
         return redirect("/login")
     else:
         #Getting passwords from database
-        c.execute("""SELECT users.password FROM users WHERE username = '{}';""".format(username))
+        c.execute("""SELECT user.password FROM user WHERE username = '{}';""".format(username))
         data = c.fetchall()
         if(data[0] != password):
             #Checks if password is correct if the username exists
@@ -83,7 +98,7 @@ def login_test():
     return "works"
 
 if __name__ == "__main__":
-    db.db_setup()
+    util.db_setup()
     app.debug = True
     User.new_user("test_username", "test_password", "test_name", "test_dob", "test_email",
                 "test_phone_number", "test_bio", "test_horoscope_info")

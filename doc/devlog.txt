@@ -44,3 +44,12 @@ added requirements.txt
 
 prathamR -- 2019-11-20 08:34
 Finish createAccounts.html
+
+prathamR -- 2019-11-20 22:53
+Update the code with create-account backend, rename db folder to "util"
+
+ -- 2019-11-21 08:21
+
+
+prathamR -- 2019-11-21 08:21
+Fix create accounts, add flashing message to login page

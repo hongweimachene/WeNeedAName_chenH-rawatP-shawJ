@@ -5,7 +5,10 @@
     <title></title>
   </head>
   <body>
-    <form class="" action="/create" method="post">
+    {% for error in get_flashed_messages() %}
+      {{error}}
+    {% endfor %}
+    <form class="" action="/createAccount" method="post">
       Name: <input type="text" name="name">
       Username: <input type="text" name="username">
       Password: <input type="password" name="password">
