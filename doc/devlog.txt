@@ -56,3 +56,6 @@ Fix create accounts, add flashing message to login page
 
 prathamR -- 2019-11-21 08:25
 Actually fix login, as well as logout
+
+prathamR -- 2019-11-21 08:26
+Fix login, and logout
