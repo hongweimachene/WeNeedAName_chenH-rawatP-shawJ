@@ -69,7 +69,8 @@ def authenticate():
         #Getting passwords from database
         c.execute("""SELECT user.password FROM user WHERE username = '{}';""".format(username))
         data = c.fetchall()
-        if(data[0] != password):
+        print(data[0])
+        if(data[0][0] != password):
             #Checks if password is correct if the username exists
             flash("Your Password in Incorrect")
             return redirect("/login")
@@ -84,7 +85,7 @@ def welcomePage():
 @app.route("/logout")
 def logout():
     if("username" in session):
-        session.pop["username"]
+        session.pop("username")
         flash("Successfully Logged Out")
     return redirect("/login")
 
