@@ -8,6 +8,9 @@
   <body>
       <center>
           <h2>Log In</h2>
+          {% for error in get_flashed_messages() %}
+            {{error}}
+          {% endfor %}
             <form class="" action="/auth" method="post">
                 <div>
                     <label>Username</label>
