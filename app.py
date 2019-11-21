@@ -31,7 +31,7 @@ def login():
 
 @app.route("/create")
 def create():
-    return render_template("createAccount.html");
+    return render_template("createAccounts.html");
 
 @app.route("/createAccount", methods=["POST"])
 def createAccount():
