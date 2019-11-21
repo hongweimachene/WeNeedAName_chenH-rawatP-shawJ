@@ -15,7 +15,7 @@ Ohmanda Daily Horoscope:
 Moon Phase API:   
 
 Instructions:
-To clone repo, use 
+To clone repo, use              
 git clone git@github.com:hongweimachene/softdev_p01.git  
 
 To install the required packages, type in the terminal:      
