@@ -6,6 +6,9 @@
     <title>Create Your Account</title>
 </head>
 <body>
+  {% for error in get_flashed_messages() %}
+    {{error}}
+  {% endfor %}
     <form class="" action="/createAccount" method="post">
         <div class="form-group" action="/create" method="post">
             <label>Name</label>
@@ -24,7 +27,7 @@
             <input type="password" name="password-confirm">
         </div>
         <div class="form-group">
-            <label>Date of Birth</label>
+            <label>Date of Birth (YYYY-MM-DD)</label>
             <input type="date" name="dob">
         </div>
         <div class="form-group">
