@@ -15,17 +15,23 @@ Ohmanda Daily Horoscope:
 Moon Phase API:      
 
 ## Instructions
-To clone repo, use     
+To clone repo, use the following in the terminal          
 ```bash
 git clone git@github.com:hongweimachene/softdev_p01.git  
 ```    
-
-To install the required packages, type in the terminal:    
+    
+To create and activate a virtual environment, type in the terminal       
+```bash
+python3 -m venv <name of venv>  
+source <name of venv/bin/activate
+```
+   
+To install the required packages, type in the terminal    
 ```bash
 pip install -r <path to file>/requirements.txt     
 ```
    
-To run, type in command line     
+To run, type in the terminal    
 ```bash
 python3 app.py     
 ```
