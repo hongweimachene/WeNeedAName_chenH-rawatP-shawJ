@@ -47,11 +47,7 @@ def createAccount():
             print("bad")
             flash("Please submit each request")
             return redirect("/create")
-    """try:
-        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet")
-    except:
-        flash("Username already exists")
-        return redirect("/create")
+    # User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], requests.ephemermis(request.form["dob"].split("-")[0],request.form["dob"].split("-")[1], request.form["dob"].split("-")[2]))
     # TODO: integrate API for horoscope data"""
     if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet"):
         return redirect("/create")
