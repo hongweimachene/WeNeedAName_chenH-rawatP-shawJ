@@ -22,7 +22,7 @@ git clone git@github.com:hongweimachene/softdev_p01.git
     
 To create and activate a virtual environment, type in the terminal       
 ```bash
-python3 -m venv <name of venv>  
+python3 -m venv <name of venv>bash  
 source <name of venv/bin/activate
 ```
    
