@@ -8,7 +8,6 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-import util.requests as requests
 from login_tool import login_required, current_user
 
 
@@ -48,12 +47,14 @@ def createAccount():
             print("bad")
             flash("Please submit each request")
             return redirect("/create")
-    try:
-        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], requests.ephemermis(request.form["dob"].split("-")[0],request.form["dob"].split("-")[1], request.form["dob"].split("-")[2]))
+    """try:
+        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet")
     except:
         flash("Username already exists")
         return redirect("/create")
-    # TODO: integrate API for horoscope data
+    # TODO: integrate API for horoscope data"""
+    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet"):
+        return redirect("/create")
     session["username"] = request.form["username"]
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
@@ -65,13 +66,8 @@ def authenticate():
     username = request.form["username"]
     password = request.form["pass"]
     #Getting username from database
-    user_auth = authenticate(username, password)
-    if(user_auth == -1):
-        #Checks if username is in database
-        flash("No Username Found")
-        return redirect("/login")
-    elif (user_auth == 0):
-        flash("Your Password in Incorrect")
+    user_auth = User.authenticate_user(username, password)
+    if not user_auth:
         return redirect("/login")
     else:
     #Passed all checks, good to login
