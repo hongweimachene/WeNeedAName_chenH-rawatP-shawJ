@@ -8,7 +8,7 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-from login_tool import login_required
+from login_tool import login_required, current_user
 
 
 app = Flask(__name__)
@@ -19,6 +19,9 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 #b# ========================================================================
 #b# Site Interaction
+@app.context_processor
+def inject_current_user():
+    return dict(current_user = login_tool.current_user())
 
 @app.route("/")
 def start():
