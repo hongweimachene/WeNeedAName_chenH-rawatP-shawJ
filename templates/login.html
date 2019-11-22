@@ -5,51 +5,29 @@
     <meta charset="utf-8">
     <title>Login to StarCrossed!</title>
 </head>
-<body
-<<<<<<< HEAD
-<div class="container">
-    <img src="../doc/flag.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236">
-</div>
-<center>
-    <h2>Log In</h2>
-    {% for error in get_flashed_messages() %}
-    {{error}}
-    {% endfor %}
-    <form class="" action="/auth" method="post">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username">
-        </div>
-=======
+<body>
     <div class="container">
-        <img src="../doc/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
+        <img src="../doc/flag.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236">
     </div>
     <center>
         <h2>Log In</h2>
         {% for error in get_flashed_messages() %}
-          {{error}}
+        {{error}}
         {% endfor %}
-            <form class="" action="/auth" method="post">
-                <div>
-                    <label>Username</label>
-                    <input type="text" name="username">
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" name="pass">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button><br><br>
-            </form>
->>>>>>> 1344979d74f3cd62021656359e0f5a31125c51de
+        <form class="" action="/auth" method="post">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="pass">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button><br><br>
+        </form>
         <div>
-            <label>Password</label>
-            <input type="password" name="pass">
+            <a class="btn btn-primary" href="./create" role="button">New Account</a>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button><br><br>
-    </form>
-    <div>
-        <a class="btn btn-primary" href="./create" role="button">New Account</a>
-    </div>
-</center>
+    </center>
 </body>
 </html>
