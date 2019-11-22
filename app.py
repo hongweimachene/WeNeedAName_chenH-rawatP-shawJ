@@ -8,7 +8,7 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-from login_tool import login_required
+from login_tool import login_required, current_user
 
 
 app = Flask(__name__)
@@ -19,6 +19,9 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 #b# ========================================================================
 #b# Site Interaction
+@app.context_processor
+def inject_current_user():
+    return dict(current_user = current_user())
 
 @app.route("/")
 def start():
@@ -44,12 +47,10 @@ def createAccount():
             print("bad")
             flash("Please submit each request")
             return redirect("/create")
-    try:
-        User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet")
-    except:
-        flash("Username already exists")
+    # User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], requests.ephemermis(request.form["dob"].split("-")[0],request.form["dob"].split("-")[1], request.form["dob"].split("-")[2]))
+    # TODO: integrate API for horoscope data"""
+    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet"):
         return redirect("/create")
-    # TODO: integrate API for horoscope data
     session["username"] = request.form["username"]
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
@@ -61,25 +62,12 @@ def authenticate():
     username = request.form["username"]
     password = request.form["pass"]
     #Getting username from database
-    db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
-    c = db.cursor()
-    c.execute("""SELECT user.username FROM user WHERE username = '{}';""".format(username))
-    data = c.fetchall()
-    if(len(data) == 0):
-        #Checks if username is in database
-        flash("No Username Found")
+    user_auth = User.authenticate_user(username, password)
+    if not user_auth:
         return redirect("/login")
     else:
-        #Getting passwords from database
-        c.execute("""SELECT user.password FROM user WHERE username = '{}';""".format(username))
-        data = c.fetchall()
-        print(data[0])
-        if(data[0][0] != password):
-            #Checks if password is correct if the username exists
-            flash("Your Password in Incorrect")
-            return redirect("/login")
     #Passed all checks, good to login
-    session["username"] = username
+        session["username"] = username
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
@@ -98,8 +86,4 @@ def logout():
 if __name__ == "__main__":
     util.db_setup()
     app.debug = True
-    User.new_user("test_username", "test_password", "test_name", "test_dob", "test_email",
-                "test_phone_number", "test_bio", "test_horoscope_info")
-    print(User.get_by_username("test_username")) #should print user id of that username
-    print(User(1).name) #creates a new user object by id
     app.run()

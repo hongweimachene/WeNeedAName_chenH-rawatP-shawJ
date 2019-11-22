@@ -1,4 +1,5 @@
 from util import db_ex
+from flask import flash
 
 class User:
     def __init__(self, id):
@@ -18,9 +19,31 @@ class User:
 
     @staticmethod
     def new_user(username, password, name, dob, email, phone_number, bio, horoscope_info):
-        db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
-                 VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
-                 \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+        if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
+            flash("username has been taken")
+            return False
+        else:
+            db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
+                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
+                  \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+            return True
+
     @staticmethod
     def get_by_username(username):
-        return db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()[0][0]
+        fetch = db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
+        if len(fetch) == 0:
+            raise ValueError("user with that username has not been found")
+        else:
+            return fetch[0][0]
+
+    @staticmethod
+    def authenticate_user(username, password):
+        fetch = db_ex(f"SELECT password FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
+        if len(fetch) == 0:
+            flash("Username not found")
+            return False #user with that username does not exist
+        if fetch[0][0] != password:
+            flash("Incorrect password")
+            return False
+        else:
+            return True
