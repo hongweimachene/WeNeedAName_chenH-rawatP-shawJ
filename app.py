@@ -21,7 +21,7 @@ app.secret_key = os.urandom(32)
 #b# Site Interaction
 @app.context_processor
 def inject_current_user():
-    return dict(current_user = login_tool.current_user())
+    return dict(current_user = current_user())
 
 @app.route("/")
 def start():
@@ -64,25 +64,17 @@ def authenticate():
     username = request.form["username"]
     password = request.form["pass"]
     #Getting username from database
-    db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
-    c = db.cursor()
-    c.execute("""SELECT user.username FROM user WHERE username = '{}';""".format(username))
-    data = c.fetchall()
-    if(len(data) == 0):
+    user_auth = authenticate(username, password)
+    if(user_auth == -1):
         #Checks if username is in database
         flash("No Username Found")
         return redirect("/login")
+    elif (user_auth == 0):
+        flash("Your Password in Incorrect")
+        return redirect("/login")
     else:
-        #Getting passwords from database
-        c.execute("""SELECT user.password FROM user WHERE username = '{}';""".format(username))
-        data = c.fetchall()
-        print(data[0])
-        if(data[0][0] != password):
-            #Checks if password is correct if the username exists
-            flash("Your Password in Incorrect")
-            return redirect("/login")
     #Passed all checks, good to login
-    session["username"] = username
+        session["username"] = username
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
@@ -101,8 +93,4 @@ def logout():
 if __name__ == "__main__":
     util.db_setup()
     app.debug = True
-    User.new_user("test_username", "test_password", "test_name", "test_dob", "test_email",
-                "test_phone_number", "test_bio", "test_horoscope_info")
-    print(User.get_by_username("test_username")) #should print user id of that username
-    print(User(1).name) #creates a new user object by id
     app.run()

@@ -18,9 +18,27 @@ class User:
 
     @staticmethod
     def new_user(username, password, name, dob, email, phone_number, bio, horoscope_info):
-        db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
-                 VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
-                 \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+        if db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall() > 0:
+            raise ValueError("username has been taken")
+        else:
+            db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
+                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
+                  \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+
     @staticmethod
     def get_by_username(username):
-        return db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()[0][0]
+        fetch = db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
+        if len(fetch) == 0:
+            raise ValueError("user with that username has not been found")
+        else:
+            return fetch[0][0]
+
+    @staticmethod
+    def authenticate_user(username, password):
+        fetch = db_ex(f"SELECT password FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
+        if len(fetch) == 0:
+            return -1 #user with that username does not exist
+        if lenfetch[0][0] != password:
+            return 0 #password is incorrect
+        else:
+            return 1 #user authenticated
