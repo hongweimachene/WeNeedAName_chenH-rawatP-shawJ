@@ -35,7 +35,7 @@ To install the required packages, type in the terminal
 pip install -r <path to file>/requirements.txt     
 ```
    
-To run, type in the terminal    
+To run, make sure you are in the the root of the repo, and type in the terminal    
 ```bash
 python3 app.py     
 ```
