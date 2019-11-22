@@ -40,16 +40,16 @@ yifanW -- 2019-11-20 08:11
 updated login html
 
 chenH -- 2019-11-20 08:30
-added requirements.txt 
+added requirements.txt
 
 prathamR -- 2019-11-20 08:34
 Finish createAccounts.html
 
+yifanW -- 2019-11-21 08:29
+updated createAccounts html, fixed route
+
 prathamR -- 2019-11-20 22:53
 Update the code with create-account backend, rename db folder to "util"
-
- -- 2019-11-21 08:21
-
 
 prathamR -- 2019-11-21 08:21
 Fix create accounts, add flashing message to login page
@@ -59,3 +59,6 @@ Actually fix login, as well as logout
 
 prathamR -- 2019-11-21 08:26
 Fix login, and logout
+
+prathamR -- 2019-11-21 08:41
+Remove test thing

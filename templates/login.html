@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>Login to StarCrossed!</title>
-  </head>
-  <body>
-      <center>
-          <h2>Log In</h2>
-          {% for error in get_flashed_messages() %}
-            {{error}}
-          {% endfor %}
+<<<<<<< HEAD
+</head>
+<body
+    <div class="container">
+        <img src="../doc/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
+    </div>
+    <center>
+        <h2>Log In</h2>
+        {% for error in get_flashed_messages() %}
+          {{error}}
+        {% endfor %}
             <form class="" action="/auth" method="post">
                 <div>
                     <label>Username</label>
@@ -23,9 +27,18 @@
                 <button type="submit" class="btn btn-primary">Submit</button><br><br>
             </form>
             <div>
-                <a class="btn btn-primary" href="/create" role="button">New Account</a>
+                <label>Username</label>
+                <input type="text" name="username">
             </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="pass">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button><br><br>
+        </form>
+        <div>
+            <a class="btn btn-primary" href="/create" role="button">New Account</a>
         </div>
     </center>
-  </body>
+</body>
 </html>
