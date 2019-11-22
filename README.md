@@ -20,10 +20,14 @@ To clone repo, use the following in the terminal
 git clone git@github.com:hongweimachene/softdev_p01.git  
 ```    
     
-To create and activate a virtual environment, type in the terminal       
+To create a virtual environment, type in the terminal       
 ```bash
 python3 -m venv <name of venv> 
-```bashsource <name of venv/bin/activate
+```
+
+To activate your virtual environment, use   
+```bash
+source <name of venv>/bin/activate>
 ```
    
 To install the required packages, type in the terminal    
