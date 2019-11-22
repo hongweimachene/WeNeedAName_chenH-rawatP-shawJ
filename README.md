@@ -27,7 +27,7 @@ python3 -m venv <name of venv>
 
 To activate your virtual environment, use   
 ```bash
-source <name of venv>/bin/activate>
+source <name of venv>/bin/activate
 ```
    
 To install the required packages, type in the terminal    
