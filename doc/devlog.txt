@@ -65,3 +65,6 @@ Remove test thing
 
 prathamR -- 2019-11-23 19:07
 Remove merge conflicts from createAccounts page
+
+prathamR -- 2019-11-23 19:08
+Realize I removed the wrong part of the merge conflicts, oops
