@@ -6,41 +6,6 @@
     <title>Create Your Account</title>
 </head>
 <body>
-        <form class="" action="/createAccount" method="post">
-            <div class="form-group" action="/createAccount" method="post">
-                <label>Name</label>
-                <input type="text" name="name">
-            </div>
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password">
-            </div>
-            <div class="form-group">
-                <label>Retype Password</label>
-                <input type="password" name="password-confirm">
-            </div>
-            <div class="form-group">
-                <label>Date of Birth</label>
-                <input type="date" name="dob">
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email">
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="number" name="phone">
-            </div>
-            <div class="form-group">
-                <label>Profile Bio</label><br>
-                <textarea name="bio" rows="8" cols="80"></textarea>
-            </div>
-            <button type="submit" value="Create Account" class="btn btn-primary">Submit</button>
-        </form>
   {% for error in get_flashed_messages() %}
     {{error}}
   {% endfor %}
@@ -79,6 +44,5 @@
         </div>
         <button type="submit" value="Create Account" class="btn btn-primary">Submit</button>
     </form>
->>>>>>> 1344979d74f3cd62021656359e0f5a31125c51de
 </body>
 </html>

@@ -62,3 +62,6 @@ Fix login, and logout
 
 prathamR -- 2019-11-21 08:41
 Remove test thing
+
+prathamR -- 2019-11-23 19:07
+Remove merge conflicts from createAccounts page
