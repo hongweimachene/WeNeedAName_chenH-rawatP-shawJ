@@ -45,6 +45,15 @@ added requirements.txt
 prathamR -- 2019-11-20 08:34
 Finish createAccounts.html
 
+shawJ -- 2019-11-20 8:39
+Created module with setup for database schema
+
+shawJ -- 2019-11-20 11:40
+Finished creating user class with method for searching by username
+
+shawJ -- 2019-11-21 8:20
+Created decorator to require login
+
 yifanW -- 2019-11-21 08:29
 updated createAccounts html, fixed route
 
@@ -60,6 +69,18 @@ Actually fix login, as well as logout
 prathamR -- 2019-11-21 08:26
 Fix login, and logout
 
+shawJ -- 2019-11-21 08:30
+Stored the previous url that login_required wrapper redirects to accessed page after login
+
+shawJ -- 2019-11-21 08:34
+Also redirects to accessed page after creating user
+
+shawJ -- 2019-11-22 08:30
+Made current_user a template global
+
+shawJ -- 2019-11-22 11:30
+Fixed errors with login and implemented authetication through class method
+
 prathamR -- 2019-11-21 08:41
 Remove test thing
 
@@ -74,3 +95,6 @@ Implement SkyField python API for planetary positions
 
 prathamr -- 2019-11-23 20:57
 Remove diagnostic print statement
+
+shawJ -- 2019-11-24 13:37
+Created request class with class methods
