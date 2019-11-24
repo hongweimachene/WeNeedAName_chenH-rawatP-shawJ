@@ -17,6 +17,8 @@ def db_setup():
              username VARCHAR,
              password VARCHAR,
              name VARCHAR,
+             gender VARCHAR,
+             preference VARCHAR,
              dob TIMESTAMP,
              email VARCHAR,
              phone_number VARCHAR,

@@ -11,21 +11,23 @@ class User:
             self.username = table_entry[0][1]
             self.password = table_entry[0][2]
             self.name = table_entry[0][3]
-            self.dob = table_entry[0][4]
-            self.email = table_entry[0][5]
-            self.phone_number = table_entry[0][6]
-            self.bio = table_entry[0][7]
-            self.horoscope_info = table_entry[0][8]
+            self.gender = table_entry[0][4]
+            self.preference = table_entry[0][5]
+            self.dob = table_entry[0][6]
+            self.email = table_entry[0][7]
+            self.phone_number = table_entry[0][8]
+            self.bio = table_entry[0][9]
+            self.horoscope_info = table_entry[0][10]
 
     @staticmethod
-    def new_user(username, password, name, dob, email, phone_number, bio, horoscope_info):
+    def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, horoscope_info):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
             flash("username has been taken")
             return False
         else:
-            db_ex(f"""INSERT INTO 'user' (username, password, name, dob, email, phone_number, bio, horoscope_info)
-                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{dob}\", \"{email}\",
-                  \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+            db_ex(f"""INSERT INTO 'user' (username, password, name, gender, prefence, dob, email, phone_number, bio, horoscope_info)
+                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{gender}\", \"{prefence}\",
+                   \"{dob}\", \"{email}\", \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
             return True
 
     @staticmethod
