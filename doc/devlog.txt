@@ -71,3 +71,6 @@ Realize I removed the wrong part of the merge conflicts, oops
 
 prathamR -- 2019-11-23 20:55
 Implement SkyField python API for planetary positions
+
+prathamr -- 2019-11-23 20:57
+Remove diagnostic print statement

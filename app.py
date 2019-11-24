@@ -85,7 +85,6 @@ def logout():
     return redirect("/login")
 
 if __name__ == "__main__":
-    print(api.mercury(2002, 8, 15))
     util.db_setup()
     app.debug = True
     app.run()
