@@ -39,7 +39,7 @@ def pluto(year, month, day):
     return planets["sun"].at(t).observe(planets["pluto"]).position.au
 
 def ohmanda(sunsign):
-    request = http.request("GET", "http://ohmanda.com/api/horoscope/".format(sunsign))
+    request = http.request("GET", f"http://ohmanda.com/api/horoscope/{sunsign}")
     return request.data
 
 def json2dict(json):

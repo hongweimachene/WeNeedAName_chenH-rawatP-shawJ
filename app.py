@@ -73,9 +73,11 @@ def authenticate():
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
 
+
 @app.route("/welcome")
+@login_required
 def welcomePage():
-    return render_template("welcome.html")
+    return render_template("welcome.html", horoscope=api.ohmanda(current_user().get_starsign()))
 
 @app.route("/hotsingles")
 def matchmaking():
