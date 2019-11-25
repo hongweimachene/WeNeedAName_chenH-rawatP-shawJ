@@ -78,7 +78,17 @@ def welcomePage():
 
 @app.route("/hotsingles")
 def matchmaking():
-    return "hi"
+    session["prev_url"] = "/hotsingles"
+    return
+
+@app.route("/relation")
+def updateRelations():
+    userID = request.args["id"]
+    newRelation = request.args["type"]
+    # TODO: Add SQL Implementation
+    redirect = session["prev_url"]
+    session.pop("prev_url")
+    return redirect(redirect)
 
 @app.route("/logout")
 def logout():
