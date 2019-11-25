@@ -98,3 +98,6 @@ Remove diagnostic print statement
 
 shawJ -- 2019-11-24 13:37
 Created request class with class methods
+
+yifanW -- 2019-11-25 05:22
+Added gender and sexual orientation
