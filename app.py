@@ -8,9 +8,8 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-import util.requests as api
+import util.api_request as api
 from login_tool import login_required, current_user
-
 
 app = Flask(__name__)
 
@@ -76,6 +75,10 @@ def authenticate():
 @app.route("/welcome")
 def welcomePage():
     return render_template("welcome.html")
+
+@app.route("/hotsingles")
+def matchmaking():
+    return "hi"
 
 @app.route("/logout")
 def logout():
