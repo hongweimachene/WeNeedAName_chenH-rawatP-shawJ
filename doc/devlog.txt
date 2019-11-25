@@ -108,8 +108,11 @@ Add matchmaker file and Person class
 prathamR -- 2019-11-25 08:25
 Fix import
 
+prathamR -- 2019-11-25 08:45
+Add updating relations route
+
 yifanW -- 2019-11-25 08:28
-fixing background in login 
+fixing background in login
 
 chenH -- 2019-11-25 08:20
 HOME STRETCH PLAN
@@ -118,10 +121,10 @@ HOME STRETCH PLAN
   - come up with compatibility algorithm
   - finish writing html for the pages
   - implement rest of database functions(user personal info) to use for compatibility
-  
+
   things to cut if no time:
   - editing profile info
-  
+
   things to add if time:
   - send message w/ request
   - delete account
