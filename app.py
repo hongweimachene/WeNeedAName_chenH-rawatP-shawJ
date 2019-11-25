@@ -8,7 +8,8 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-import util.requests as api
+from util.request import request
+import util.api_request as api
 from login_tool import login_required, current_user
 
 
@@ -83,6 +84,22 @@ def logout():
         session.pop("username")
         flash("Successfully Logged Out")
     return redirect("/login")
+
+@app.route("/requests")
+def requests():
+    return redirect("requests/recieved")
+
+@app.route("requests/recieved")
+def recieved_requests():
+    return render_template("recieved_requests.html")
+
+@app.route("requests/pending")
+def pending_requests():
+    return render_template("pending_requests.html")
+
+@app.route("requests/accepted")
+def accepted_requests():
+    return render_template("accepted_requests.html")
 
 if __name__ == "__main__":
     util.db_setup()
