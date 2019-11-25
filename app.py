@@ -8,7 +8,7 @@ import sqlite3, os
 import datetime
 import util
 from util.user import User
-from util.request import request
+from util.request import Request
 import util.api_request as api
 from login_tool import login_required, current_user
 
@@ -49,9 +49,9 @@ def createAccount():
             print("bad")
             flash("Please enter a value in every field")
             return redirect("/create")
-    # User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], requests.ephemermis(request.form["dob"].split("-")[0],request.form["dob"].split("-")[1], request.form["dob"].split("-")[2]))
+# new_user(username, password, name, gender, preference, dob, email, phone_number, bio, horoscope_info):
     # TODO: integrate API for horoscope data"""
-    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], "f", "he", request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], "yeet"):
+    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["gender"], request.form["preference"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], request.form["location"]):
         return redirect("/create")
     session["username"] = request.form["username"]
     if ("prev_url" in session):
@@ -89,15 +89,15 @@ def logout():
 def requests():
     return redirect("requests/recieved")
 
-@app.route("requests/recieved")
+@app.route("/requests/recieved")
 def recieved_requests():
     return render_template("recieved_requests.html")
 
-@app.route("requests/pending")
+@app.route("/requests/pending")
 def pending_requests():
     return render_template("pending_requests.html")
 
-@app.route("requests/accepted")
+@app.route("/requests/accepted")
 def accepted_requests():
     return render_template("accepted_requests.html")
 

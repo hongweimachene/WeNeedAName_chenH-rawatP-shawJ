@@ -17,17 +17,17 @@ class User:
             self.email = table_entry[0][7]
             self.phone_number = table_entry[0][8]
             self.bio = table_entry[0][9]
-            self.horoscope_info = table_entry[0][10]
+            self.location = table_entry[0][10]
 
     @staticmethod
-    def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, horoscope_info):
+    def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
             flash("username has been taken")
             return False
         else:
-            db_ex(f"""INSERT INTO 'user' (username, password, name, gender, prefence, dob, email, phone_number, bio, horoscope_info)
-                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{gender}\", \"{prefence}\",
-                   \"{dob}\", \"{email}\", \"{phone_number}\", \"{bio}\", \"{horoscope_info}\");""")
+            db_ex(f"""INSERT INTO 'user' (username, password, name, gender, preference, dob, email, phone_number, bio, location)
+                  VALUES (\"{username}\", \"{password}\", \"{name}\", \"{gender}\", \"{preference}\",
+                   \"{dob}\", \"{email}\", \"{phone_number}\", \"{bio}\", \"{location}\");""")
             return True
 
     @staticmethod

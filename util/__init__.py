@@ -10,8 +10,8 @@ def db_ex(cmd):
     return out
 
 def db_setup():
-    # db_ex("DROP TABLE IF EXISTS \"user\"")
-    # db_ex("DROP TABLE IF EXISTS \"request\"")
+    #db_ex("DROP TABLE IF EXISTS \"user\"")
+    #db_ex("DROP TABLE IF EXISTS \"request\"")
     db_ex("""CREATE TABLE IF NOT EXISTS 'user'
              (id INTEGER PRIMARY KEY NOT NULL,
              username VARCHAR,
@@ -23,7 +23,7 @@ def db_setup():
              email VARCHAR,
              phone_number VARCHAR,
              bio VARCHAR,
-             horoscope_info VARCHAR);""")
+             location VARCHAR);""")
     db_ex("""CREATE TABLE IF NOT EXISTS 'request'
              (request_id INTEGER PRIMARY KEY NOT NULL,
              sender_id INTEGER,
