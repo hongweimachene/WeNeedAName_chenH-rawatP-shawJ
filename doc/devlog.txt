@@ -110,3 +110,18 @@ Fix import
 
 yifanW -- 2019-11-25 08:28
 fixing background in login 
+
+chenH -- 2019-11-25 08:20
+HOME STRETCH PLAN
+  to do:
+  - complete flask app linking all the pages
+  - come up with compatibility algorithm
+  - finish writing html for the pages
+  - implement rest of database functions(user personal info) to use for compatibility
+  
+  things to cut if no time:
+  - editing profile info
+  
+  things to add if time:
+  - send message w/ request
+  - delete account
