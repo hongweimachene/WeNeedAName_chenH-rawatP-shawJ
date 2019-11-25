@@ -12,7 +12,6 @@ from util.request import Request
 import util.api_request as api
 from login_tool import login_required, current_user
 
-
 app = Flask(__name__)
 
 # db = sqlite3.connect("horoscope_dating.db") #open if file exists, otherwise create
@@ -77,6 +76,10 @@ def authenticate():
 @app.route("/welcome")
 def welcomePage():
     return render_template("welcome.html")
+
+@app.route("/hotsingles")
+def matchmaking():
+    return "hi"
 
 @app.route("/logout")
 def logout():
