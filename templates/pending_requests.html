@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Find your Match!</title>
+  </head>
+  <body>
+    {% for person in listings %}
+      {%person[0]%}
+      Personality Compatibility: {%person[1]%}
+      Sexual Compatibility: {%person[2]%}
+      In-Laws Compatibilty: {%person[3]%}
+      Future Success: {%person[4]%}
+
+      <a href="/relation?id={%person[5]%}&type=block">Remove Request</a>
+    {% endfor %}
+
+    <a href="/welcome">Go Back</a>
+  </body>
+</html>

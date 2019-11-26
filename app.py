@@ -73,11 +73,14 @@ def authenticate():
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
 
+
 @app.route("/welcome")
+@login_required
 def welcomePage():
-    return render_template("welcome.html")
+    return render_template("welcome.html", horoscope=api.ohmanda(current_user().get_starsign()))
 
 @app.route("/hotsingles")
+@login_required
 def matchmaking():
     session["prev_url"] = "/hotsingles"
     #SQL to get list of people who have not been requested/blocked from the database, as well as their DOBs
@@ -92,6 +95,7 @@ def matchmaking():
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")
+@login_required
 def updateRelations():
     userID = request.args["id"]
     newRelation = request.args["type"]
@@ -101,6 +105,7 @@ def updateRelations():
     return redirect(redirect)
 
 @app.route("/logout")
+@login_required
 def logout():
     if("username" in session):
         session.pop("username")
@@ -108,18 +113,22 @@ def logout():
     return redirect("/login")
 
 @app.route("/requests")
+@login_required
 def requests():
     return redirect("requests/recieved")
 
 @app.route("/requests/recieved")
+@login_required
 def recieved_requests():
     return render_template("recieved_requests.html")
 
 @app.route("/requests/pending")
+@login_required
 def pending_requests():
     return render_template("pending_requests.html")
 
 @app.route("/requests/accepted")
+@login_required
 def accepted_requests():
     return render_template("accepted_requests.html")
 

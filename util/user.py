@@ -19,6 +19,70 @@ class User:
             self.bio = table_entry[0][9]
             self.location = table_entry[0][10]
 
+    def get_starsign(self):
+        month = int(self.dob[-5:-3])
+        day = int(self.dob[-2:])
+        if month == 1:
+            if day < 20:
+                return "capricorn"
+            else:
+                return "aquarius"
+        elif month == 2:
+            if day < 19:
+                return "aquarius"
+            else:
+                return "pisces"
+        elif month == 3:
+            if day < 21:
+                return "aquarius"
+            else:
+                return "aries"
+        elif month == 4:
+            if day < 20:
+                return "aries"
+            else:
+                return "taurus"
+        elif month == 5:
+            if day < 21:
+                return "taurus"
+            else:
+                return "gemini"
+        elif month == 6:
+            if day < 21:
+                return "gemini"
+            else:
+                return "cancer"
+        elif month == 7:
+            if day < 23:
+                return "cancer"
+            else:
+                return "leo"
+        elif month == 8:
+            if day < 23:
+                return "leo"
+            else:
+                return "virgo"
+        elif month == 9:
+            if day < 23:
+                return "virgo"
+            else:
+                return "libra"
+        elif month == 10:
+            if day < 23:
+                return "libra"
+            else:
+                return "scorpio"
+        elif month == 11:
+            if day < 22:
+                return "scorpio"
+            else:
+                return "sagittarius"
+        else:
+            if day < 22:
+                return "sagittarius"
+            else:
+                return "capricorn"
+
     @staticmethod
     def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
