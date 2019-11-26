@@ -140,3 +140,6 @@ Write quick backend for the requests pages, and add info to DevLog
 
 prathamR -- 2019-11-26 08:16
 Add location to user information in accepted-requests page
+
+prathamR -- 2019-11-26 08:17
+Add login_required flag to routes
