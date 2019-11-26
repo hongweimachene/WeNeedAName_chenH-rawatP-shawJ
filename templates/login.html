@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="../doc/logo.png">
     <meta charset="utf-8">
     <title>Login to StarCrossed!</title>
 </head>
 <body style="background-image: url('../doc/bg1.jpg'); background-size: 100% 100%; background-attachment: fixed;">
-        <div class="container">
-            <img src="../doc/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
-        </div>
-        <center>
-            <h2 class="text-white">Log In</h2>
-            {% for error in get_flashed_messages() %}
-            {{error}}
-            {% endfor %}
-            <form class="" action="/auth" method="post">
-                <div>
-                    <label class="text-white">Username</label>
-                    <input type="text" name="username">
-                </div>
-                <div>
-                    <label class="text-white">Password</label>
-                    <input type="password" name="pass">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button><br><br>
-            </form>
+    <div class="container">
+        <img src="../doc/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
+    </div>
+    <center>
+        <h2 class="text-white">Log In</h2>
+        {% for error in get_flashed_messages() %}
+        <div class="alert alert-danger">{{error}}</div>
+        {% endfor %}
+        <form class="" action="/auth" method="post">
             <div>
-                <a class="btn btn-primary" href="./create" role="button">New Account</a>
+                <label class="text-white">Username</label>
+                <input type="text" name="username">
             </div>
-        </center>
+            <div>
+                <label class="text-white">Password</label>
+                <input type="password" name="pass">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button><br><br>
+        </form>
+        <div>
+            <a class="btn btn-primary" href="./create" role="button">New Account</a>
+        </div>
+    </center>
 </body>
 </html>
