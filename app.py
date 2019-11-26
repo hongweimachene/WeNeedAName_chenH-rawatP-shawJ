@@ -80,13 +80,22 @@ def welcomePage():
 @app.route("/hotsingles")
 def matchmaking():
     session["prev_url"] = "/hotsingles"
-    return
+    #SQL to get list of people who have not been requested/blocked from the database, as well as their DOBs
+    for person in query:
+        this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
+        other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
+        searchMatches[0] = #SQL for other person's name
+        searchMatches[1] = matchmaker.personalityCompatibility(this, other)
+        searchMatches[2] = matchmaker.sexualCompatibility(this, other)
+        searchMatches[3] = matchmaker.inLawsCompatibility(this, other)
+        searchMatches[4] = matchmaker.futureSuccess(this, other)
+    return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")
 def updateRelations():
     userID = request.args["id"]
     newRelation = request.args["type"]
-    # TODO: Add SQL Implementation
+    # TODO: Add SQL Implementation to update the relationship
     redirect = session["prev_url"]
     session.pop("prev_url")
     return redirect(redirect)
