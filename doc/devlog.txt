@@ -117,10 +117,10 @@ fixing background in login
 chenH -- 2019-11-25 08:20
 HOME STRETCH PLAN
   to do:
-  - complete flask app linking all the pages
-  - come up with compatibility algorithm
-  - finish writing html for the pages
-  - implement rest of database functions(user personal info) to use for compatibility
+  - complete flask app linking all the pages: Pratham
+  - come up with compatibility algorithm: Pratham
+  - finish writing html for the pages: Yifan/Pratham
+  - implement rest of database functions(user personal info) to use for compatibility: Justin
 
   things to cut if no time:
   - editing profile info
@@ -134,3 +134,6 @@ Create routing for matchmaking page
 
 yifanW -- 2019-11-25 22:00
 updated login and welcome html
+
+prathamR -- 2019-11-26 08:13
+Write quick backend for the requests pages, and add info to DevLog
