@@ -143,3 +143,6 @@ Add location to user information in accepted-requests page
 
 prathamR -- 2019-11-26 08:17
 Add login_required flag to routes
+
+prathamR -- 2019-11-26 08:35
+Update routing and html with bios
