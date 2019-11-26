@@ -117,10 +117,10 @@ fixing background in login
 chenH -- 2019-11-25 08:20
 HOME STRETCH PLAN
   to do:
-  - complete flask app linking all the pages
-  - come up with compatibility algorithm
-  - finish writing html for the pages
-  - implement rest of database functions(user personal info) to use for compatibility
+  - complete flask app linking all the pages: Pratham
+  - come up with compatibility algorithm: Pratham
+  - finish writing html for the pages: Yifan/Pratham
+  - implement rest of database functions(user personal info) to use for compatibility: Justin
 
   things to cut if no time:
   - editing profile info
@@ -134,3 +134,27 @@ Create routing for matchmaking page
 
 yifanW -- 2019-11-25 22:00
 updated login and welcome html
+
+prathamR -- 2019-11-26 08:13
+Write quick backend for the requests pages, and add info to DevLog
+
+prathamR -- 2019-11-26 08:16
+Add location to user information in accepted-requests page
+
+prathamR -- 2019-11-26 08:17
+Add login_required flag to routes
+
+prathamR -- 2019-11-26 08:35
+Update routing and html with bios
+
+yifanW -- 2019-11-26 08:22
+changed icon and alert
+
+yifanW -- 2019-11-26 08:24
+deleted start html file
+
+chenH -- 2019-11-26 08:40
+updated design doc to match current APIS, added the Skyfield module, removed APIs we aren't using and updated component map
+
+prathamR -- 2019-11-26 08:42
+Update welcome page with links

@@ -1,6 +1,8 @@
 import datetime, subprocess
 
-print("Please enter your name:")
+subprocess.run(['git', 'pull'])
+
+print("\n\n\nPlease enter your name:")
 print("Format: firstnameL")
 name = input()
 
