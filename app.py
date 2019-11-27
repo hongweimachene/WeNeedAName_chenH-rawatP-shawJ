@@ -120,41 +120,38 @@ def requests():
 @app.route("/requests/recieved")
 @login_required
 def recieved_requests():
-    session["prev_url"] = "/recieved_requests"
     #SQL to get list of people who have requested the current user from the database, as well as their DOBs
     for person in query:
         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
-        searchMatches[0] = #SQL for other person's name
+        #searchMatches[0] = #SQL for other person's name
         searchMatches[1] = matchmaker.personalityCompatibility(this, other)
         searchMatches[2] = matchmaker.sexualCompatibility(this, other)
         searchMatches[3] = matchmaker.inLawsCompatibility(this, other)
         searchMatches[4] = matchmaker.futureSuccess(this, other)
-        searchMatches[5] = #SQL for the other person's bio
+        #searchMatches[5] = #SQL for the other person's bio
     return render_template("recieved_requests.html", listings=searchMatches)
 
 @app.route("/requests/pending")
 @login_required
 def pending_requests():
-    session["prev_url"] = "/pending_requests"
     #SQL to get list of people who have requested the current user from the database, as well as their DOBs
     for person in query:
         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
-        searchMatches[0] = #SQL for other person's name
+        s#earchMatches[0] = #SQL for other person's name
         searchMatches[1] = matchmaker.personalityCompatibility(this, other)
         searchMatches[2] = matchmaker.sexualCompatibility(this, other)
         searchMatches[3] = matchmaker.inLawsCompatibility(this, other)
         searchMatches[4] = matchmaker.futureSuccess(this, other)
-        searchMatches[5] = #SQL for the other person's bio
+        #searchMatches[5] = #SQL for the other person's bio
     return render_template("pending_requests.html", listings=searchMatches)
 
 @app.route("/requests/accepted")
 @login_required
 def accepted_requests():
-    session["prev_url"] = "/accepted_requests"
     #SQL to get list of people who have requested the current user from the database, as well as their DOBs
-    for person in query:
+    #for person in query:
         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
         searchMatches[0] = #SQL for other person's name
