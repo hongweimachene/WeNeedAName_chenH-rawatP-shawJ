@@ -2,13 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="icon" href="../doc/Horoscope_dating.png">
+    <link rel="icon" href="{{url_for('static', filename='Horoscope_dating.png')}}">
     <meta charset="utf-8">
     <title>Login to StarCrossed!</title>
 </head>
-<body style="background-image: url('../doc/bg1.jpg'); background-size: 100% 100%; background-attachment: fixed;">
+<body style="background-image: url({{url_for('static', filename='bg1.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
     <div class="container">
-        <img src="../doc/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
+        <img src="{{url_for('static', filename='logo.png')}}" class="img-rounded" alt="Cinque Terre" width="304" height="236">
     </div>
     <center>
         <h2 class="text-white">Log In</h2>

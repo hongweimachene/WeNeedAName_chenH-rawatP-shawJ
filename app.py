@@ -80,7 +80,7 @@ def authenticate():
 def welcomePage():
     get_request = api.ohmanda(current_user().get_starsign())
     print(f"Ohmanda request: {get_request}")
-    return render_template("welcome.html", horoscope=json.loads(get_request))
+    return render_template("welcome.html", horoscope=json.loads(get_request), name=session['username'])
 
 @app.route("/hotsingles")
 @login_required
@@ -92,7 +92,7 @@ def matchmaking():
         this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
         otherDOB = User.query_by_id(person, "dob").split("-")
         other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-        searchMatches[counter][0] = User.query_by_id(, "name")
+        searchMatches[counter][0] = User.query_by_id("name")
         searchMatches[counter][1] = matchmaker.personalityCompatibility(this, other)
         searchMatches[counter][2] = matchmaker.sexualCompatibility(this, other)
         searchMatches[counter][3] = matchmaker.inLawsCompatibility(this, other)
