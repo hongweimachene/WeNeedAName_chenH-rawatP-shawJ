@@ -77,14 +77,14 @@ def authenticate():
 @app.route("/welcome")
 @login_required
 def welcomePage():
-    return render_template("welcome.html", horoscope=api.ohmanda(current_user().get_starsign()))
+    get_request = api.ohmanda(current_user().get_starsign())
+    return render_template("welcome.html", horoscope=get_request)
 
 @app.route("/hotsingles")
 @login_required
 def matchmaking():
-    session["prev_url"] = "/hotsingles"
-    #SQL to get list of people who have not been requested/blocked from the database, as well as their DOBs
-    for person in query:
+    return f"{current_user().unmatched()}"
+    """for person in query:
         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
         searchMatches[0] = #SQL for other person's name
@@ -92,8 +92,7 @@ def matchmaking():
         searchMatches[2] = matchmaker.sexualCompatibility(this, other)
         searchMatches[3] = matchmaker.inLawsCompatibility(this, other)
         searchMatches[4] = matchmaker.futureSuccess(this, other)
-        searchMatches[5] = #SQL for the other person's bio
-    return render_template("matchmaking.html", listings=searchMatches)
+    return render_template("matchmaking.html", listings=searchMatches)"""
 
 @app.route("/relation")
 @login_required

@@ -152,3 +152,9 @@ changed icon and alert
 
 yifanW -- 2019-11-26 08:24
 deleted start html file
+
+chenH -- 2019-11-26 08:40
+updated design doc to match current APIS, added the Skyfield module, removed APIs we aren't using and updated component map
+
+prathamR -- 2019-11-26 08:42
+Update welcome page with links
