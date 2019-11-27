@@ -83,6 +83,19 @@ class User:
             else:
                 return "capricorn"
 
+    # returns a list of user ids of users whom to no request has been sent by the user
+    # and whom have not sent a request to the user
+    def unmatched(self):
+        query = db_ex(f"""SELECT id
+        FROM 'user' WHERE NOT 'user'.id = {self.id} EXCEPT SELECT * FROM
+        (SELECT sender_id FROM 'request' WHERE 'request'.reciever_id = {self.id}
+        UNION SELECT reciever_id FROM 'request' WHERE 'request'.sender_id = {self.id});""").fetchall()
+        ret = []
+        for response in query:
+            ret.append(response[0])
+        return ret
+
+
     @staticmethod
     def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:

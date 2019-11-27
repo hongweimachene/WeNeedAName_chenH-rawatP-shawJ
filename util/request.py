@@ -21,7 +21,7 @@ class Request:
             return False
         else:
             db_ex(f"""INSERT INTO 'request' (sender_id, reciever_id, status, message)
-                  VALUES (\"{sender_id}\", \"{reciever_id}\", \"pending\", \"{message}\");""")
+                  VALUES ({sender_id}, {reciever_id}, \"pending\", \"{message}\");""")
             return True
 
     @staticmethod
