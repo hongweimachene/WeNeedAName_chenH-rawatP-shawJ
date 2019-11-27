@@ -142,6 +142,13 @@ class User:
             return fetch[0][0]
 
     @staticmethod
+    def query_by_id(userID, query):
+        fetch = db_ex(f"SELECT {query} FROM 'user' WHERE 'user'.id = {userID};").fetchall()
+        if(len(fetch) == 0):
+            flash("Username not found, or error with query")
+        return fetch[0][0]
+
+    @staticmethod
     def authenticate_user(username, password):
         fetch = db_ex(f"SELECT password FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
         if len(fetch) == 0:
