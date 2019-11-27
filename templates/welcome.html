@@ -11,7 +11,9 @@
         <h2 class="display-4">Welcome to StarCrossed, {{name}}!</h2>
         <p class="lead">Here are some information you may be interested in!</p>
         <hr class="my-4">
-        <p>Daily Horoscope: {{horoscope}}</p><br>
+        <p>Daily Horoscope: {{horoscope['sign'].capitalize()}} {{horoscope['date']}}<br>
+          {{horoscope['horoscope']}}
+        </p><br>
         <p>Click here to <a href="/hotsingles">find your match</a></p>
         <p>Click here to <a href="/hotsingles">shoot your shot</a></p>
         <p>Click here to <a href="/recieved_requests">see who's into you</a></p>

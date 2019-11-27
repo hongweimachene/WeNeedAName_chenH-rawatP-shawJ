@@ -40,7 +40,7 @@ def pluto(year, month, day):
 
 def ohmanda(sunsign):
     request = http.request("GET", f"http://ohmanda.com/api/horoscope/{sunsign}")
-    return request.data
+    return request.data.decode('utf-8')
 
 def json2dict(json):
     return json.loads(json)

@@ -11,6 +11,7 @@ from util.user import User
 from util.request import Request
 import util.api_request as api
 from login_tool import login_required, current_user
+import json
 
 app = Flask(__name__)
 
@@ -78,7 +79,8 @@ def authenticate():
 @login_required
 def welcomePage():
     get_request = api.ohmanda(current_user().get_starsign())
-    return render_template("welcome.html", horoscope=get_request)
+    print(f"Ohmanda request: {get_request}")
+    return render_template("welcome.html", horoscope=json.loads(get_request))
 
 @app.route("/hotsingles")
 @login_required
@@ -112,6 +114,7 @@ def logout():
         flash("Successfully Logged Out")
     return redirect("/login")
 
+"""
 @app.route("/requests")
 @login_required
 def requests():
@@ -120,7 +123,7 @@ def requests():
 @app.route("/requests/recieved")
 @login_required
 def recieved_requests():
-    #SQL to get list of people who have requested the current user from the database, as well as their DOBs
+    recieved = current_user().recieved_pending()
     for person in query:
         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
@@ -160,6 +163,7 @@ def accepted_requests():
         searchMatches[3] = #SQL for the other person's bio
         searchMatches[4] = #SQL for the other person's location
     return render_template("accepted_requests.html", listings=searchMatches)
+    """
 
 if __name__ == "__main__":
     util.db_setup()
