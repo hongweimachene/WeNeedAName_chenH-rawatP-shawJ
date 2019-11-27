@@ -1,4 +1,4 @@
-from util import db_ex
+from util import db_ex, request
 from flask import flash
 
 class User:
@@ -95,6 +95,32 @@ class User:
             ret.append(response[0])
         return ret
 
+    #returns request ids of pending requests sent by user
+    def sent_pending(self):
+        query = db_ex(f"SELECT request_id FROM 'request' WHERE 'request'.sender_id=\"{self.id}\" AND 'request'.status=\"pending\";").fetchall()
+        ret = []
+        for response in query:
+            ret.append(response[0])
+        return ret
+
+    #returns request ids of pending requests recieved by user
+    def recieved_pending(self):
+        query = db_ex(f"SELECT request_id FROM 'request' WHERE 'request'.reciever_id=\"{self.id}\" AND 'request'.status=\"pending\";").fetchall()
+        ret = []
+        for response in query:
+            ret.append(response[0])
+        return ret
+
+    #returns request ids of accepted requests sent or recieved by user that have been accepted
+    def accepted(self):
+        query = db_ex(f"SELECT request_id FROM 'request' WHERE 'request'.reciever_id=\"{self.id}\" AND 'request'.status=\"accepted\";").fetchall()
+        ret = []
+        for response in query:
+            ret.append(response[0])
+        query = db_ex(f"SELECT request_id FROM 'request' WHERE 'request'.sender_id=\"{self.id}\" AND 'request'.status=\"accepted\";").fetchall()
+        for response in query:
+            ret.append(response[0])
+        return ret
 
     @staticmethod
     def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
