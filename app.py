@@ -163,20 +163,32 @@ def recieved_requests():
     session["prev_url"] = "/requests/recieved"
     return render_template("received_requests.html", listings=searchMatches)
 
-# @app.route("/requests/pending")
-# @login_required
-# def pending_requests():
-#     #SQL to get list of people who have requested the current user from the database, as well as their DOBs
-#     for person in query:
-#         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
-#         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
-#         s#earchMatches[0] = #SQL for other person's name
-#         searchMatches[1] = matchmaker.personalityCompatibility(this, other)
-#         searchMatches[2] = matchmaker.sexualCompatibility(this, other)
-#         searchMatches[3] = matchmaker.inLawsCompatibility(this, other)
-#         searchMatches[4] = matchmaker.futureSuccess(this, other)
-#         #searchMatches[5] = #SQL for the other person's bio
-#     return render_template("pending_requests.html", listings=searchMatches)
+@app.route("/requests/pending")
+@login_required
+def pending_requests():
+    recieved = current_user().sent_pending()
+    counter = 0;
+    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    for person in recieved:
+        try:
+            userDOB = current_user().dob.split("-")
+            this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
+            otherDOB = User.query_by_id(person, "dob").split("-")
+            other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
+            searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
+            searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
+            searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
+            searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
+            searchMatches[counter][5] = User.query_by_id(person, "bio")
+            searchMatches[counter][6] = person
+            counter += 1
+            if(counter > 45 or counter == len(searchMatches) - 1):
+                break;
+        except Exception as e:
+            print(e)
+    session["prev_url"] = "/requests/pending"
+    return render_template("pending_requests.html", listings=searchMatches)
 #
 # @app.route("/requests/accepted")
 # @login_required
