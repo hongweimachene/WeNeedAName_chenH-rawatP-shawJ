@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta charset="utf-8">
-    <link rel="icon" href="../doc/Horoscope_dating.png">
+    <link rel="icon" href="{{url_for('static', filename='Horoscope_dating.png')}}">
     <title>Find your Match!</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
     <div class="btn-group">
         <button type="button" class="btn btn-primary" href="/relation?id={%person[5]%}&type=accept">Accept</button>
         <button type="button" class="btn btn-primary" href="/relation?id={%person[5]%}&type=block">Remove</button>
-    </div><br>
+    </div><br><br>
     {% endfor %}
     <p class="lead">
         <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>

@@ -2,18 +2,39 @@
 <html lang="en" dir="ltr">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="icon" href="../doc/Horoscope_dating.png">
+    <link rel="icon" href="{{url_for('static', filename='Horoscope_dating.png')}}">
     <meta charset="utf-8">
     <title>StarCrossed</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">StarCrossed</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/hotsingles">Shoot Your Shot</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recieved_requests">People Into You</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pending_requests">People You've Requested</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/accepted_requests">People You've Linked With</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="jumbotron">
         <h2 class="display-4">Welcome to StarCrossed, {{name}}!</h2>
         <p class="lead">Here are some information you may be interested in!</p>
         <hr class="my-4">
         <p>Daily Horoscope: {{horoscope['sign'].capitalize()}} {{horoscope['date']}}<br>
-          {{horoscope['horoscope']}}
+            {{horoscope['horoscope']}}
         </p><br>
+
+<!-- Need to decide which is better -->
         <p>Click here to <a href="/hotsingles">find your match</a></p>
         <p>Click here to <a href="/hotsingles">shoot your shot</a></p>
         <p>Click here to <a href="/recieved_requests">see who's into you</a></p>

@@ -13,7 +13,7 @@
     <center>
         <h2 class="text-white">Log In</h2>
         {% for error in get_flashed_messages() %}
-        <div class="alert alert-danger w-50 p-1">{{error}}</div>
+        <div class="alert alert-info w-50 p-1">{{error}}</div>
         {% endfor %}
         <form class="" action="/auth" method="post">
             <div>
