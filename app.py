@@ -80,6 +80,8 @@ def authenticate():
 def welcomePage():
     get_request = api.ohmanda(current_user().get_starsign())
     print(f"Ohmanda request: {get_request}")
+    print(current_user().dob)
+    print(current_user().get_starsign())
     return render_template("welcome.html", horoscope=json.loads(get_request))
 
 @app.route("/hotsingles")
