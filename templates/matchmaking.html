@@ -17,8 +17,8 @@
     Future Success: {{person[4]}}<br>
     Bio: {{person[5]}}<br>
     <div class="btn-group">
-        <button type="button" class="btn btn-primary" href="/relation?id={{person[5]}}&type=request">Send Request</button>
-        <button type="button" class="btn btn-primary" href="/relation?id={%person[5]%}&type=block">Remove</button>
+        <a href="/relation?id={{person[6]}}&type=request"><button type="button" class="btn btn-primary">Send Request</button></a>
+        <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
     </div><br><br>
     {% endif %}
     {% endfor %}

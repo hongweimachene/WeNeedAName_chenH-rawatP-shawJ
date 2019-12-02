@@ -90,7 +90,8 @@ def welcomePage():
 def matchmaking():
     # return f"{current_user().unmatched()}"
     counter = 0;
-    searchMatches = [[[None] for x in range(5)] for y in range(50)];
+    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    print(current_user().unmatched())
     for person in current_user().unmatched():
         try:
             userDOB = current_user().dob.split("-")
@@ -102,11 +103,13 @@ def matchmaking():
             searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
             searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
             searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
+            searchMatches[counter][5] = User.query_by_id(person, "bio")
+            searchMatches[counter][6] = person
             counter += 1
             if(counter > 45 or counter == len(searchMatches) - 1):
                 break;
-        except:
-            print("bruh moment")
+        except Exception as e:
+            print(e)
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")
