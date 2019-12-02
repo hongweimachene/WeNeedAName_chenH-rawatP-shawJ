@@ -110,6 +110,7 @@ def matchmaking():
                 break;
         except Exception as e:
             print(e)
+    session["prev_url"] = "/hotsingles"
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")
@@ -117,10 +118,10 @@ def matchmaking():
 def updateRelations():
     userID = request.args["id"]
     newRelation = request.args["type"]
-    Request.new_request(current_user(), userID, newRelation, "")
-    redirect = session["prev_url"]
+    Request.new_request(current_user().id, userID, newRelation, "")
+    url = session["prev_url"]
     session.pop("prev_url")
-    return redirect(redirect)
+    return redirect(url)
 
 @app.route("/logout")
 @login_required

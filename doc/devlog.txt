@@ -176,3 +176,6 @@ fixed html files
 
 prathamR -- 2019-12-02 08:33
 Work on errors with sending user requests
+
+prathamR -- 2019-12-02 09:01
+Fix requesting in hotsingles
