@@ -158,3 +158,18 @@ updated design doc to match current APIS, added the Skyfield module, removed API
 
 prathamR -- 2019-11-26 08:42
 Update welcome page with links
+
+prathamR -- 2019-11-27 08:41
+Update routes for matched users with SQL
+
+yifanW -- 2019-11-27 08:48
+Updated received requests html
+
+yifanW -- 2019-11-27 13:15
+fixed error with loading images
+
+prathamR -- 2019-12-01 23:00
+Fix showing potential matches backend (at least with displaying only)
+
+yifanW -- 2019-12-02 05:45
+fixed html files

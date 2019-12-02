@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="{{url_for('static', filename='Horoscope_dating.png')}}">
     <title>Find your Match!</title>
-  </head>
-  <body>
+</head>
+<body>
+    <h4>Here are some people who you want to consider:</h4><br>
     {% for person in listings %}
-      {%person[0]%}
-      Personality Compatibility: {%person[1]%}
-      Sexual Compatibility: {%person[2]%}
-      In-Laws Compatibilty: {%person[3]%}
-      Future Success: {%person[4]%}
-      Bio: {%person[5]%}
-
-      <a href="/relation?id={%person[5]%}&type=request">Send Match</a>
-      <a href="/relation?id={%person[5]%}&type=block">Remove</a>
+    {% if person[0] != [None] %}
+    {{person[0]}}<br>
+    Personality Compatibility: {{person[1]}}<br>
+    Sexual Compatibility: {{person[2]}}<br>
+    In-Laws Compatibilty: {{person[3]}}<br>
+    Future Success: {{person[4]}}<br>
+    Bio: {{person[5]}}<br>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" href="/relation?id={{person[5]}}&type=request">Send Request</button>
+        <button type="button" class="btn btn-primary" href="/relation?id={%person[5]%}&type=block">Remove</button>
+    </div><br><br>
+    {% endif %}
     {% endfor %}
-
-    <a href="/welcome">Go Back</a>
-  </body>
+    <p class="lead">
+        <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>
+    </p>
+</body>
 </html>

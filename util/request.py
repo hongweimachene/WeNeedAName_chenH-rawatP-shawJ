@@ -15,13 +15,13 @@ class Request:
 
 
     @staticmethod
-    def new_request(sender_id, reciever_id, message):
+    def new_request(sender_id, reciever_id, status, message):
         if len(db_ex(f"SELECT * FROM 'request' WHERE 'request'.sender_id=\"{sender_id}\" AND 'request'.reciever_id=\"{reciever_id}\";").fetchall()) > 0:
             flash("a request has already been sent to this person")
             return False
         else:
             db_ex(f"""INSERT INTO 'request' (sender_id, reciever_id, status, message)
-                  VALUES ({sender_id}, {reciever_id}, \"pending\", \"{message}\");""")
+                  VALUES ({sender_id}, {reciever_id}, {status}, \"{message}\");""")
             return True
 
     @staticmethod
