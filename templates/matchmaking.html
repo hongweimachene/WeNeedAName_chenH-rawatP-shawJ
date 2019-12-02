@@ -9,7 +9,7 @@
 <body>
     <h4>Here are some people who you want to consider:</h4><br>
     {% for person in listings %}
-    {% if person[0] != [None] %}
+    {% if person[6] != [None] %}
     {{person[0]}}<br>
     Personality Compatibility: {{person[1]}}<br>
     Sexual Compatibility: {{person[2]}}<br>
@@ -17,7 +17,7 @@
     Future Success: {{person[4]}}<br>
     Bio: {{person[5]}}<br>
     <div class="btn-group">
-        <a href="/relation?id={{person[6]}}&type=request"><button type="button" class="btn btn-primary">Send Request</button></a>
+        <a href="/relation?id={{person[6]}}&type=pending"><button type="button" class="btn btn-primary">Send Request</button></a>
         <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
     </div><br><br>
     {% endif %}
