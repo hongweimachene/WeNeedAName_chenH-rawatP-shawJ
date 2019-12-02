@@ -7,6 +7,7 @@ from flask import Flask, render_template, session, flash, request, redirect
 import sqlite3, os
 import datetime
 import util
+import util.matchmaker
 from util.user import User
 from util.request import Request
 import util.api_request as api
@@ -87,17 +88,23 @@ def welcomePage():
 def matchmaking():
     # return f"{current_user().unmatched()}"
     counter = 0;
-    for person in current_user.unmatched():
-        userDOB = current_user().dob.split("-")
-        this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
-        otherDOB = User.query_by_id(person, "dob").split("-")
-        other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-        searchMatches[counter][0] = User.query_by_id("name")
-        searchMatches[counter][1] = matchmaker.personalityCompatibility(this, other)
-        searchMatches[counter][2] = matchmaker.sexualCompatibility(this, other)
-        searchMatches[counter][3] = matchmaker.inLawsCompatibility(this, other)
-        searchMatches[counter][4] = matchmaker.futureSuccess(this, other)
-        counter += 1
+    searchMatches = [[[None] for x in range(5)] for y in range(50)];
+    for person in current_user().unmatched():
+        try:
+            userDOB = current_user().dob.split("-")
+            this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
+            otherDOB = User.query_by_id(person, "dob").split("-")
+            other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
+            searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
+            searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
+            searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
+            searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
+            counter += 1
+            if(counter > 45 or counter == len(searchMatches) - 1):
+                break;
+        except:
+            print("bruh moment")
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")

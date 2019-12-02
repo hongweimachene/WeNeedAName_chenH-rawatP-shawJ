@@ -8,35 +8,35 @@ time = load.timescale()
 
 def mercury(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["mercury"]).position.au
+    return planets["sun"].at(t).observe(planets["mercury barycenter"]).position.au
 
 def venus(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["venus"]).position.au
+    return planets["sun"].at(t).observe(planets["venus barycenter"]).position.au
 
 def mars(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["mars"]).position.au
+    return planets["sun"].at(t).observe(planets["mars barycenter"]).position.au
 
 def jupiter(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["jupiter"]).position.au
+    return planets["sun"].at(t).observe(planets["jupiter barycenter"]).position.au
 
 def saturn(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["saturn"]).position.au
+    return planets["sun"].at(t).observe(planets["saturn barycenter"]).position.au
 
 def uranus(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["uranus"]).position.au
+    return planets["sun"].at(t).observe(planets["uranus barycenter"]).position.au
 
 def neptune(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["neptune"]).position.au
+    return planets["sun"].at(t).observe(planets["neptune barycenter"]).position.au
 
 def pluto(year, month, day):
     t = time.utc(int(year), int(month), int(day))
-    return planets["sun"].at(t).observe(planets["pluto"]).position.au
+    return planets["sun"].at(t).observe(planets["pluto barycenter"]).position.au
 
 def ohmanda(sunsign):
     request = http.request("GET", f"http://ohmanda.com/api/horoscope/{sunsign}")
