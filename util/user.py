@@ -1,6 +1,7 @@
 from util import db_ex, request, api_request
 from flask import flash
 
+'''User class to store user data easier into database'''
 class User:
     def __init__(self, id):
         table_entry = db_ex(f"SELECT * FROM 'user' WHERE 'user'.id=\"{id}\";").fetchall()
@@ -20,6 +21,7 @@ class User:
             self.location = table_entry[0][10]
 
     def get_starsign(self):
+        '''Determines starsign of user based on date of birth'''
         month = int(self.dob[-5:-3])
         day = int(self.dob[-2:])
         if month == 1:
