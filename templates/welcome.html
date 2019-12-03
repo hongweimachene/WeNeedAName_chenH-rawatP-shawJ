@@ -12,16 +12,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/hotsingles">Shoot Your Shot</a>
+                    <a class="nav-link" href="/hotsingles">Shoot Your Shot!</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/requests/recieved">People Into You</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/requests/pending">People You've Requested</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/requests/accepted">People You've Linked With</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Requests</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link" href="/requests/recieved">Received</a>
+                        <a class="nav-link" href="/requests/pending">Pending</a>
+                        <a class="nav-link" href="/requests/accepted">Accepted</a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -33,13 +32,6 @@
         <p>Daily Horoscope: {{horoscope['sign'].capitalize()}} {{horoscope['date']}}<br>
             {{horoscope['horoscope']}}
         </p><br>
-
-<!-- Need to decide which is better -->
-        <p>Click here to <a href="/hotsingles">find your match</a></p>
-        <p>Click here to <a href="/hotsingles">shoot your shot</a></p>
-        <p>Click here to <a href="/requests/recieved">see who's into you</a></p>
-        <p>Click here to <a href="/requests/pending">view people you've requested</a></p>
-        <p>Click here to <a href="/requests/accepted">see the people you've linked with</a></p>
         <p class="lead">
             <a class="btn btn-primary" href="/logout" role="button">Logout</a>
         </p>
