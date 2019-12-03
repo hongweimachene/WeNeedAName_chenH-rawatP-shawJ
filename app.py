@@ -12,6 +12,7 @@ from util.user import User
 from util.request import Request
 import util.api_request as api
 from login_tool import login_required, current_user
+import randomUsers 
 import json
 
 app = Flask(__name__)
@@ -250,5 +251,6 @@ def location():
 
 if __name__ == "__main__":
     util.db_setup()
+    randomUsers.populate()
     app.debug = True
     app.run()

@@ -109,8 +109,10 @@ class User:
         ret = []
         for response in query:
             ret.append(response[0])
-        if self.preference == "Both":
-            pass
+        if self.preference == "Males":
+            filter(lambda id : query_by_id(id, "gender") == "Male", ret)
+        elif self.preference == "Females":
+            filter(lambda id : query_by_id(id, "gender") == "Female", ret)
         return ret
 
     #returns request ids of pending requests sent by user
