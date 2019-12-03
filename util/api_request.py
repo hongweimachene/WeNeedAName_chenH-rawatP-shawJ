@@ -42,8 +42,12 @@ def ohmanda(sunsign):
     request = http.request("GET", f"http://ohmanda.com/api/horoscope/{sunsign}")
     return request.data.decode('utf-8')
 
-def json2dict(json):
-    return json.loads(json)
+def APOD(key):
+    request = http.request("GET", f"https://api.nasa.gov/planetary/apod?api_key={key}")
+    return request.data.decode('utf-8')
+
+def json2dict(jsonString):
+    return json.loads(jsonString)
 
 def dict2json(dict):
     return json.dump(dict)
