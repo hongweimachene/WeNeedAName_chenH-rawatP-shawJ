@@ -188,3 +188,6 @@ Add pending_requests functionality
 
 prathamR -- 2019-12-02 21:56
 Fix login issues
+
+prathamR -- 2019-12-02 23:07
+Fix app functionality

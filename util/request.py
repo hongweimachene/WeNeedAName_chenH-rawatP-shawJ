@@ -16,16 +16,16 @@ class Request:
 
     @staticmethod
     def new_request(sender_id, reciever_id, status, message):
-        print(f"SELECT * FROM 'request' WHERE 'request'.sender_id=\"{sender_id}\" AND 'request'.reciever_id=\"{reciever_id}\";")
-        if len(db_ex(f"SELECT * FROM 'request' WHERE 'request'.sender_id=\"{sender_id}\" AND 'request'.reciever_id=\"{reciever_id}\";").fetchall()) > 0:
-            flash("a request has already been sent to this person")
-            return False
-        else:
-            print(f"""INSERT INTO 'request' (sender_id, reciever_id, status, message)
-                  VALUES ({sender_id}, {reciever_id}, {status}, \"{message}\");""")
-            db_ex(f"""INSERT INTO 'request' (sender_id, reciever_id, status, message)
-                  VALUES ({sender_id}, {reciever_id}, \"{status}\", \"{message}\");""")
-            return True
+        # if status == "block":
+        db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={sender_id} AND 'request'.reciever_id={reciever_id};""")
+        db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={reciever_id} AND 'request'.reciever_id={sender_id};""")
+        # if len(db_ex(f"SELECT * FROM 'request' WHERE 'request'.sender_id=\"{sender_id}\" AND 'request'.reciever_id=\"{reciever_id}\";").fetchall()) > 0:
+            # flash("a request has already been sent to this person")
+            # return False
+        # else:
+        db_ex(f"""INSERT INTO 'request' (sender_id, reciever_id, status, message)
+              VALUES ({sender_id}, {reciever_id}, \"{status}\", \"{message}\");""")
+        return True
 
     @staticmethod
     def get_by_sender(sender_id):

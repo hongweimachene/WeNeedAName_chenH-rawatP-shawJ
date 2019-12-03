@@ -202,9 +202,9 @@ def accepted_requests():
         try:
             searchMatches[counter][0] = User.query_by_id(person, "name")
             searchMatches[counter][1] = User.query_by_id(person, "email")
-            searchMatches[counter][2] = User.query_by_id(person, "phone")
+            searchMatches[counter][2] = User.query_by_id(person, "phone_number")
             searchMatches[counter][3] = User.query_by_id(person, "bio")
-            searchMatches[counter][4] = User.query_by_id(person, "address")
+            searchMatches[counter][4] = User.query_by_id(person, "location")
             searchMatches[counter][5] = person
             counter += 1
             if(counter > 45 or counter == len(searchMatches) - 1):
