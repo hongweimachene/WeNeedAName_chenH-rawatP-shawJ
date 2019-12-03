@@ -28,6 +28,7 @@ def inject_current_user():
 
 @app.route("/")
 def start():
+    '''Redirect to welcome if session is activate, otherwise redirect to login'''
     if("username" in session): #Check if username is stored in site cookies
         print("Username Stored in Cache")
         return redirect("/welcome") #Redirects to Logged In Welcome Page
@@ -35,6 +36,7 @@ def start():
 
 @app.route("/login")
 def login():
+    '''Creates session for user'''
     if(not "apod" in session):
         try:
             session["apod"] = api.json2dict(api.APOD("DEMO_KEY"))["hdurl"]
@@ -51,6 +53,7 @@ def create():
 
 @app.route("/createAccount", methods=["GET", "POST"])
 def createAccount():
+    '''When you create an account, you have to submit a bunch of personal information'''
     if(request.form["password"] != request.form["password-confirm"]):
         return redirect("/create")
     for data in request.form:
@@ -69,6 +72,7 @@ def createAccount():
 
 @app.route("/auth", methods=["POST"])
 def authenticate():
+    '''Authentication function'''
     #Getting data inputting in login form
     username = request.form["username"]
     password = request.form["pass"]
@@ -89,6 +93,7 @@ def authenticate():
 @app.route("/welcome")
 @login_required
 def welcomePage():
+    '''The welcome page displays a bunch of links the user can click, as well as displaying a horoscope from our API'''
     get_request = api.ohmanda(current_user().get_starsign())
     print(f"Ohmanda request: {get_request}")
     print(current_user().dob)
@@ -98,6 +103,8 @@ def welcomePage():
 @app.route("/hotsingles")
 @login_required
 def matchmaking():
+    '''The matchmaking function measures compatibility with other users in the database using available user data,
+    and displays the data'''
     # return f"{current_user().unmatched()}"
     counter = 0;
     searchMatches = [[[None] for x in range(10)] for y in range(50)];
@@ -149,6 +156,7 @@ def requests():
 @app.route("/requests/recieved")
 @login_required
 def recieved_requests():
+    '''This function handles the requests that are sent to the user, stores and displays them on screen'''
     recieved = current_user().recieved_pending()
     counter = 0;
     searchMatches = [[[None] for x in range(10)] for y in range(50)];
@@ -176,6 +184,7 @@ def recieved_requests():
 @app.route("/requests/pending")
 @login_required
 def pending_requests():
+    '''This function handles the requests that the user has sent to other users, stores and displays them'''
     recieved = current_user().sent_pending()
     counter = 0;
     searchMatches = [[[None] for x in range(10)] for y in range(50)];
@@ -203,6 +212,7 @@ def pending_requests():
 @app.route("/requests/accepted")
 @login_required
 def accepted_requests():
+    '''This function handles requests from the user that have been accepted from another user, stores and displays them'''
     recieved = current_user().accepted()
     counter = 0;
     searchMatches = [[[None] for x in range(10)] for y in range(50)];
