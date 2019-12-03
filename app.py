@@ -63,7 +63,8 @@ def createAccount():
             return redirect("/create")
 # new_user(username, password, name, gender, preference, dob, email, phone_number, bio, horoscope_info):
     # TODO: integrate API for horoscope data"""
-    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["gender"], request.form["preference"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], request.form["location"]):
+    loc_info = api.json2dict(api.ip_location(api.user_ip()))
+    if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["gender"], request.form["preference"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], f"{loc_info['lat']},{loc_info['lon']}"):
         return redirect("/create")
     session["username"] = request.form["username"]
     if ("prev_url" in session):
@@ -242,7 +243,7 @@ def accepted_requests():
 @login_required
 def location():
     print(api.ip_location(api.user_ip()))
-    print(current_user().id)
+    print(api.user_ip())
     print(current_user().location)
     print(current_user().user_dist(5))
     return f"your location: {current_user().location} distance from user '1' (id: 5): {(current_user().user_dist(5))}"

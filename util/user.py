@@ -109,6 +109,8 @@ class User:
         ret = []
         for response in query:
             ret.append(response[0])
+        if self.preference == "Both":
+            pass
         return ret
 
     #returns request ids of pending requests sent by user
