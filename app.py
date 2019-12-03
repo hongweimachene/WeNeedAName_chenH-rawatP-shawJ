@@ -145,7 +145,7 @@ def updateRelations():
 @login_required
 def logout():
     if("username" in session):
-        session.pop("username")
+        session.clear()
         flash("Successfully Logged Out")
     return redirect("/login")
 
@@ -238,7 +238,10 @@ def accepted_requests():
 @login_required
 def location():
     print(api.ip_location(api.user_ip()))
-    return current_user().location
+    print(current_user().id)
+    print(current_user().location)
+    print(current_user().user_dist(5))
+    return f"your location: {current_user().location} distance from user '1' (id: 5): {(current_user().user_dist(5))}"
 
 if __name__ == "__main__":
     util.db_setup()

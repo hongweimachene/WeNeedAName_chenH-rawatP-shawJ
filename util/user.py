@@ -1,5 +1,6 @@
 from util import db_ex, request, api_request
 from flask import flash
+import geopy.distance
 
 '''User class to store user data easier into database'''
 class User:
@@ -88,8 +89,15 @@ class User:
     def update_location(self):
         loc_info = api_request.json2dict(api_request.ip_location(api_request.user_ip()))
         db_ex(f"""UPDATE 'user'
-                  SET location = \"{loc_info['lat']}, {loc_info['lon']}\"
+                  SET location = \"{loc_info['lat']},{loc_info['lon']}\"
                   WHERE 'user'.id = \"{self.id}\";""")
+
+    def user_dist(self, other_id):
+        other_loc = db_ex(f"SELECT 'user'.location FROM 'user' WHERE 'user'.id=\"{other_id}\";").fetchall()[0][0]
+        other_coor = (float(other_loc.split(',')[0]), float(other_loc.split(',')[1]))
+        self_coor = (float(self.location.split(',')[0]), float(self.location.split(',')[1]))
+        return geopy.distance.distance(other_coor, self_coor).miles
+
 
     # returns a list of user ids of users whom to no request has been sent by the user
     # and whom have not sent a request to the user
