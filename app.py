@@ -36,7 +36,7 @@ def start():
 
 @app.route("/login")
 def login():
-    '''Creates session for user'''
+    '''Assigns astronomy picture of the day to user login'''
     if(not "apod" in session):
         try:
             session["apod"] = api.json2dict(api.APOD("DEMO_KEY"))["hdurl"]
@@ -72,7 +72,7 @@ def createAccount():
 
 @app.route("/auth", methods=["POST"])
 def authenticate():
-    '''Authentication function'''
+    '''Authentication function to log stored users in'''
     #Getting data inputting in login form
     username = request.form["username"]
     password = request.form["pass"]

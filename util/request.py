@@ -1,6 +1,7 @@
 from util import db_ex
 from flask import flash
 
+'''Request object ot main inserting into database easier'''
 class Request:
     def __init__(self, id):
         table_entry = db_ex(f"SELECT * FROM 'request' WHERE 'request'.request_id=\"{id}\";").fetchall()
@@ -16,6 +17,7 @@ class Request:
 
     @staticmethod
     def new_request(sender_id, reciever_id, status, message):
+        '''Function called when user sends a request to another user''' 
         # if status == "block":
         db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={sender_id} AND 'request'.reciever_id={reciever_id};""")
         db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={reciever_id} AND 'request'.reciever_id={sender_id};""")

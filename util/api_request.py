@@ -6,6 +6,7 @@ http = urllib3.PoolManager()
 planets = load("de421.bsp")
 time = load.timescale()
 
+'''The following returns positions of the planets using skyfield api'''
 def mercury(year, month, day):
     t = time.utc(int(year), int(month), int(day))
     return planets["sun"].at(t).observe(planets["mercury barycenter"]).position.au
@@ -38,10 +39,12 @@ def pluto(year, month, day):
     t = time.utc(int(year), int(month), int(day))
     return planets["sun"].at(t).observe(planets["pluto barycenter"]).position.au
 
+'''Gets a horoscope from the ohmanda api'''
 def ohmanda(sunsign):
     request = http.request("GET", f"http://ohmanda.com/api/horoscope/{sunsign}")
     return request.data.decode('utf-8')
 
+'''Gets an astronomy pic of the day'''
 def APOD(key):
     request = http.request("GET", f"https://api.nasa.gov/planetary/apod?api_key={key}")
     return request.data.decode('utf-8')
