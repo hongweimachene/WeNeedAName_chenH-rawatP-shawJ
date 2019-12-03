@@ -12,8 +12,10 @@ from util.user import User
 from util.request import Request
 import util.api_request as api
 from login_tool import login_required, current_user
-import randomUsers 
+import randomUsers
 import json
+from geopy.geocoders import Nominatim
+
 
 app = Flask(__name__)
 
@@ -224,12 +226,15 @@ def accepted_requests():
     searchMatches = [[[None] for x in range(20)] for y in range(100)];
     for person in recieved:
         try:
-            searchMatches[counter][0] = User.query_by_id(person, "name")
-            searchMatches[counter][6] = current_user().user_dist(person)
-            searchMatches[counter][1] = User.query_by_id(person, "email")
-            searchMatches[counter][2] = User.query_by_id(person, "phone_number")
-            searchMatches[counter][3] = User.query_by_id(person, "bio")
-            searchMatches[counter][4] = User.query_by_id(person, "location")
+            match = User(person)
+            locator = api.json2dict(api.coor_location(match.location))
+            print(locator)
+            searchMatches[counter][0] = match.name
+            searchMatches[counter][6] = f"{locator['adminArea1']}"#current_user().user_dist(person)
+            searchMatches[counter][1] = match.email
+            searchMatches[counter][2] = match.phone_number
+            searchMatches[counter][3] = match.bio
+            searchMatches[counter][4] = match.location
             searchMatches[counter][5] = person
             counter += 1
             if(counter > 45 or counter == len(searchMatches) - 1):
@@ -250,7 +255,7 @@ def location():
     return f"your location: {current_user().location} distance from user '1' (id: 5): {(current_user().user_dist(5))}"
 
 if __name__ == "__main__":
-    util.db_setup()
-    randomUsers.populate()
+    #util.db_setup()
+    #randomUsers.populate()
     app.debug = True
     app.run()

@@ -58,7 +58,11 @@ def dict2json(dict):
 def user_ip():
     request = http.request("GET", "https://api.ipify.org/")
     return request.data.decode('utf-8')
-    
+
 def ip_location(ip):
     request = http.request("GET", f"http://ip-api.com/json/{ip}?fields=status,message,lat,lon,query")
+    return request.data.decode('utf-8')
+
+def coor_location(coor):
+    request = http.request("GET", f"http://open.mapquestapi.com/geocoding/v1/reverse?key=0tAz7wEKo8BUyqMHvtBsnqDaLnaAxfFI&location={coor}")
     return request.data.decode('utf-8')

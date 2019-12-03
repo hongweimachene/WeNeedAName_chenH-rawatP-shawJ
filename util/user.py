@@ -116,6 +116,10 @@ class User:
         elif self.preference == "Females":
             ret = filter(lambda id : db_ex(f"""SELECT gender FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] == "Female", ret)
             print("females only uwu")
+        if self.gender == "Male":
+            ret = filter(lambda id : db_ex(f"""SELECT preference FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] != "Females", ret)
+        if self.gender == "Female":
+            ret = filter(lambda id : db_ex(f"""SELECT preference FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] != "Males", ret)
         return ret
 
     #returns request ids of pending requests sent by user
