@@ -14,7 +14,7 @@ import util.api_request as api
 from login_tool import login_required, current_user
 import randomUsers
 import json
-from geopy.geocoders import Nominatim
+
 
 
 app = Flask(__name__)
@@ -111,29 +111,32 @@ def matchmaking():
     '''The matchmaking function measures compatibility with other users in the database using available user data,
     and displays the data'''
     # return f"{current_user().unmatched()}"
-    counter = 0;
-    searchMatches = [[[None] for x in range(20)] for y in range(100)];
+    counter = 0
+    searchMatches = []
     print(current_user().unmatched())
     for person in current_user().unmatched():
+        if(counter > 45):
+            break
         # try:
+        info = []
         userDOB = current_user().dob.split("-")
         this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
         otherDOB = User.query_by_id(person, "dob").split("-")
         other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-        searchMatches[counter][0] = User.query_by_id(person, "name")
-        searchMatches[counter][7] = current_user().user_dist(person)
-        searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
-        searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
-        searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
-        searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
-        searchMatches[counter][5] = User.query_by_id(person, "bio")
-        searchMatches[counter][6] = person
+        other_user = User(person)
+        info.append(other_user.name)
+        info.append(util.matchmaker.personalityCompatibility(this, other))
+        info.append(util.matchmaker.sexualCompatibility(this, other))
+        info.append(util.matchmaker.inLawsCompatibility(this, other))
+        info.append(util.matchmaker.futureSuccess(this, other))
+        info.append(other_user.bio)
+        info.append(person)
+        info.append(current_user().user_dist(person))
         counter += 1
-        if(counter > 45 or counter == len(searchMatches) - 1):
-            break;
+        searchMatches.append(info)
         # except Exception as e:
         #     print(e)
-    session["prev_url"] = "/hotsingles"
+    searchMatches.sort(key = lambda x : x[7])
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation")
@@ -142,9 +145,7 @@ def updateRelations():
     userID = request.args["id"]
     newRelation = request.args["type"]
     Request.new_request(current_user().id, userID, newRelation, "")
-    url = session["prev_url"]
-    session.pop("prev_url")
-    return redirect(url)
+    return redirect(session.pop("prev_url"))
 
 @app.route("/logout")
 @login_required
@@ -164,28 +165,30 @@ def requests():
 def recieved_requests():
     '''This function handles the requests that are sent to the user, stores and displays them on screen'''
     recieved = current_user().recieved_pending()
-    counter = 0;
-    searchMatches = [[[None] for x in range(20)] for y in range(100)];
-    for person in recieved:
-        try:
+    counter = 0
+    searchMatches = []
+    try:
+        for person in recieved:
+            if(counter > 45):
+                break
+            info = []
             userDOB = current_user().dob.split("-")
             this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
             otherDOB = User.query_by_id(person, "dob").split("-")
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-            searchMatches[counter][0] = User.query_by_id(person, "name")
-            searchMatches[counter][7] = current_user().user_dist(person)
-            searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
-            searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
-            searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
-            searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
-            searchMatches[counter][5] = User.query_by_id(person, "bio")
-            searchMatches[counter][6] = person
+            other_user = User(person)
+            info.append(other_user.name)
+            info.append(util.matchmaker.personalityCompatibility(this, other))
+            info.append(util.matchmaker.sexualCompatibility(this, other))
+            info.append(util.matchmaker.inLawsCompatibility(this, other))
+            info.append(util.matchmaker.futureSuccess(this, other))
+            info.append(other_person.bio)
+            info.append(person)
+            info.append(current_user().user_dist(person))
             counter += 1
-            if(counter > 45 or counter > len(searchMatches) - 5):
-                break;
-        except Exception as e:
-            print(e)
-    session["prev_url"] = "/requests/recieved"
+            searchMatches.append(info)
+    except Exception as e:
+        print(e)
     return render_template("received_requests.html", listings=searchMatches)
 
 @app.route("/requests/pending")
@@ -193,28 +196,29 @@ def recieved_requests():
 def pending_requests():
     '''This function handles the requests that the user has sent to other users, stores and displays them'''
     recieved = current_user().sent_pending()
-    counter = 0;
-    searchMatches = [[[None] for x in range(20)] for y in range(100)];
-    for person in recieved:
-        try:
+    counter = 0
+    searchMatches = []
+    try:
+        for person in recieved:
+            if(counter > 45):
+                break
             userDOB = current_user().dob.split("-")
             this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
             otherDOB = User.query_by_id(person, "dob").split("-")
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-            searchMatches[counter][0] = User.query_by_id(person, "name")
-            searchMatches[counter][7] = current_user().user_dist(person)
-            searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
-            searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
-            searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
-            searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
-            searchMatches[counter][5] = User.query_by_id(person, "bio")
-            searchMatches[counter][6] = person
+            other_user = User(person)
+            info.append(other_user.name)
+            info.append(util.matchmaker.personalityCompatibility(this, other))
+            info.append(util.matchmaker.sexualCompatibility(this, other))
+            info.append(util.matchmaker.inLawsCompatibility(this, other))
+            info.append(util.matchmaker.futureSuccess(this, other))
+            info.append(other_user.bio)
+            info.append(person)
+            info.append(current_user().user_dist(person))
             counter += 1
-            if(counter > 45 or counter == len(searchMatches) - 1):
-                break;
-        except Exception as e:
-            print(e)
-    session["prev_url"] = "/requests/pending"
+            searchMatches.append(info)
+    except Exception as e:
+        print(e)
     return render_template("pending_requests.html", listings=searchMatches)
 #
 @app.route("/requests/accepted")
@@ -223,39 +227,26 @@ def accepted_requests():
     '''This function handles requests from the user that have been accepted from another user, stores and displays them'''
     recieved = current_user().accepted()
     counter = 0;
-    searchMatches = [[[None] for x in range(20)] for y in range(100)];
-    for person in recieved:
-        try:
+    searchMatches = []
+    try:
+        for person in recieved:
+            if(counter > 45):
+                break
             match = User(person)
-            locator = api.json2dict(api.coor_location(match.location))
-            print(locator)
-            searchMatches[counter][0] = match.name
-            searchMatches[counter][6] = f"{locator['adminArea1']}"#current_user().user_dist(person)
-            searchMatches[counter][1] = match.email
-            searchMatches[counter][2] = match.phone_number
-            searchMatches[counter][3] = match.bio
-            searchMatches[counter][4] = match.location
-            searchMatches[counter][5] = person
+            info.append(match.name)
+            info.append(match.email)
+            info.append(match.phone_number)
+            info.append(match.bio)
+            info.append(match.location)
+            info.append(person)
+            info.append(current_user().user_dist(person))
             counter += 1
-            if(counter > 45 or counter == len(searchMatches) - 1):
-                break;
-        except Exception as e:
-            print(e)
-    session["prev_url"] = "/requests/pending"
+    except Exception as e:
+        print(e)
     return render_template("accepted_requests.html", listings=searchMatches)
 
-
-@app.route("/location", methods=["GET"])
-@login_required
-def location():
-    print(api.ip_location(api.user_ip()))
-    print(api.user_ip())
-    print(current_user().location)
-    print(current_user().user_dist(5))
-    return f"your location: {current_user().location} distance from user '1' (id: 5): {(current_user().user_dist(5))}"
-
 if __name__ == "__main__":
-    #util.db_setup()
-    #randomUsers.populate()
+    util.db_setup()
+    randomUsers.populate()
     app.debug = True
     app.run()
