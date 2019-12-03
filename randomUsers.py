@@ -10,4 +10,4 @@ def populate():
         #username = ""
         #for i in range(10):
         #    username += r.choice(string.ascii_lowercase)
-        User.new_user(x, "", names.get_full_name(gender=gen.lower()), gen, r.choice(["Both", "Males", "Females"]), date, "dummy email", "dummy phone number", "lorem ipsum shut up", f"{r.uniform(-90, 90)},{r.uniform(-180, 180)}")
+        User.new_user(x, "", names.get_full_name(gender=gen.lower()), gen, r.choice(["Both", "Males", "Females"]), date, "dummy email", "dummy phone number", "lorem ipsum shut up", f"{r.uniform(35, 45)},{r.uniform(-80, 70)}")
