@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <title>Login to StarCrossed!</title>
 </head>
+{% if bg == "bg1.jpg"%}
 <body style="background-image: url({{url_for('static', filename='bg1.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
+{% else %}
+<body style="background-image: url({{bg}}); background-size: 100% 100%; background-attachment: fixed;">
+{% endif %}
     <div class="container">
         <img src="{{url_for('static', filename='logo.png')}}" class="img-rounded" alt="Cinque Terre" width="304" height="236">
     </div>

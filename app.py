@@ -35,7 +35,15 @@ def start():
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    if(not "apod" in session):
+        try:
+            session["apod"] = api.json2dict(api.APOD("DEMO_KEY"))["hdurl"]
+            # The DEMO_KEY is used here due to caching essentially making the limit almost impossible to reach as the file is never removed
+            # Adding a key to the code would not be in the interests of a user, and so we have left it out
+        except Exception as e:
+            print(e)
+            session["apod"] = "bg1.jpg"
+    return render_template("login.html", bg=session["apod"])
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
