@@ -1,4 +1,4 @@
-from util import db_ex, request
+from util import db_ex, request, api_request
 from flask import flash
 
 class User:
@@ -82,6 +82,11 @@ class User:
                 return "sagittarius"
             else:
                 return "capricorn"
+
+    def update_location(self):
+        db_ex(f"""UPDATE 'user' FROM 'user'
+                  SET 'user'.location=\"{test}\"
+                  WHERE 'user'.id={self.id};""")
 
     # returns a list of user ids of users whom to no request has been sent by the user
     # and whom have not sent a request to the user

@@ -47,3 +47,9 @@ def json2dict(json):
 
 def dict2json(dict):
     return json.dump(dict)
+
+def user_ip():
+    request = http.request("GET", "https://api.ipify.org/")
+    return request.data.decode('utf-8')
+def ip_location(ip):
+    request = http.request("GET", f"http://ip-api.com/json/{ip}?fields=status,message,lat,lon,query")

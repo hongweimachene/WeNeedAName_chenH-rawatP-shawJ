@@ -73,6 +73,7 @@ def authenticate():
         session["username"] = username
         print(session)
         print(current_user().id)
+        current_user().update_location()
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
@@ -213,6 +214,12 @@ def accepted_requests():
             print(e)
     session["prev_url"] = "/requests/pending"
     return render_template("accepted_requests.html", listings=searchMatches)
+
+
+@app.route("/location", methods=["GET"])
+@login_required
+def get_my_ip():
+    return current_user().location()
 
 if __name__ == "__main__":
     util.db_setup()
