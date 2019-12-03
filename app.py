@@ -237,7 +237,7 @@ def accepted_requests():
 @app.route("/location", methods=["GET"])
 @login_required
 def get_my_ip():
-    return current_user().location()
+    return current_user().location
 
 if __name__ == "__main__":
     util.db_setup()

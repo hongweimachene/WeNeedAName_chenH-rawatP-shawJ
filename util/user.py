@@ -84,9 +84,9 @@ class User:
                 return "capricorn"
 
     def update_location(self):
-        db_ex(f"""UPDATE 'user' FROM 'user'
-                  SET 'user'.location=\"{test}\"
-                  WHERE 'user'.id={self.id};""")
+        db_ex(f"""UPDATE 'user'
+                  SET location = \"test\"
+                  WHERE 'user'.id = \"{self.id}\";""")
 
     # returns a list of user ids of users whom to no request has been sent by the user
     # and whom have not sent a request to the user
