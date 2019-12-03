@@ -200,3 +200,6 @@ Add file to add random users to the database
 
 prathamR -- 2019-12-03 01:01
 Implement APOD
+
+chenH -- 2019-12-03 01:30
+added comments to most .py script functions and classes
