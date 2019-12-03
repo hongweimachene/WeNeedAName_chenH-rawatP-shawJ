@@ -107,12 +107,15 @@ class User:
         (SELECT sender_id FROM 'request' WHERE 'request'.reciever_id = {self.id}
         UNION SELECT reciever_id FROM 'request' WHERE 'request'.sender_id = {self.id});""").fetchall()
         ret = []
+        print(self.preference)
         for response in query:
             ret.append(response[0])
         if self.preference == "Males":
-            filter(lambda id : query_by_id(id, "gender") == "Male", ret)
+            ret = filter(lambda id : db_ex(f"""SELECT gender FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] == "Male", ret)
+            print("males only uwu")
         elif self.preference == "Females":
-            filter(lambda id : query_by_id(id, "gender") == "Female", ret)
+            ret = filter(lambda id : db_ex(f"""SELECT gender FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] == "Female", ret)
+            print("females only uwu")
         return ret
 
     #returns request ids of pending requests sent by user
