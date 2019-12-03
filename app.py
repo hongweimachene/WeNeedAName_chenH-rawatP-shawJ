@@ -108,26 +108,27 @@ def matchmaking():
     and displays the data'''
     # return f"{current_user().unmatched()}"
     counter = 0;
-    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    searchMatches = [[[None] for x in range(20)] for y in range(100)];
     print(current_user().unmatched())
     for person in current_user().unmatched():
-        try:
-            userDOB = current_user().dob.split("-")
-            this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
-            otherDOB = User.query_by_id(person, "dob").split("-")
-            other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
-            searchMatches[counter][0] = User.query_by_id(person, "name")
-            searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
-            searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
-            searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
-            searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
-            searchMatches[counter][5] = User.query_by_id(person, "bio")
-            searchMatches[counter][6] = person
-            counter += 1
-            if(counter > 45 or counter == len(searchMatches) - 1):
-                break;
-        except Exception as e:
-            print(e)
+        # try:
+        userDOB = current_user().dob.split("-")
+        this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
+        otherDOB = User.query_by_id(person, "dob").split("-")
+        other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
+        searchMatches[counter][0] = User.query_by_id(person, "name")
+        searchMatches[counter][7] = current_user().user_dist(person)
+        searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
+        searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
+        searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
+        searchMatches[counter][4] = util.matchmaker.futureSuccess(this, other)
+        searchMatches[counter][5] = User.query_by_id(person, "bio")
+        searchMatches[counter][6] = person
+        counter += 1
+        if(counter > 45 or counter == len(searchMatches) - 1):
+            break;
+        # except Exception as e:
+        #     print(e)
     session["prev_url"] = "/hotsingles"
     return render_template("matchmaking.html", listings=searchMatches)
 
@@ -160,7 +161,7 @@ def recieved_requests():
     '''This function handles the requests that are sent to the user, stores and displays them on screen'''
     recieved = current_user().recieved_pending()
     counter = 0;
-    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    searchMatches = [[[None] for x in range(20)] for y in range(100)];
     for person in recieved:
         try:
             userDOB = current_user().dob.split("-")
@@ -168,6 +169,7 @@ def recieved_requests():
             otherDOB = User.query_by_id(person, "dob").split("-")
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
             searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][7] = current_user().user_dist(person)
             searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
             searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
             searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
@@ -175,7 +177,7 @@ def recieved_requests():
             searchMatches[counter][5] = User.query_by_id(person, "bio")
             searchMatches[counter][6] = person
             counter += 1
-            if(counter > 45 or counter == len(searchMatches) - 1):
+            if(counter > 45 or counter > len(searchMatches) - 5):
                 break;
         except Exception as e:
             print(e)
@@ -188,7 +190,7 @@ def pending_requests():
     '''This function handles the requests that the user has sent to other users, stores and displays them'''
     recieved = current_user().sent_pending()
     counter = 0;
-    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    searchMatches = [[[None] for x in range(20)] for y in range(100)];
     for person in recieved:
         try:
             userDOB = current_user().dob.split("-")
@@ -196,6 +198,7 @@ def pending_requests():
             otherDOB = User.query_by_id(person, "dob").split("-")
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
             searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][7] = current_user().user_dist(person)
             searchMatches[counter][1] = util.matchmaker.personalityCompatibility(this, other)
             searchMatches[counter][2] = util.matchmaker.sexualCompatibility(this, other)
             searchMatches[counter][3] = util.matchmaker.inLawsCompatibility(this, other)
@@ -216,10 +219,11 @@ def accepted_requests():
     '''This function handles requests from the user that have been accepted from another user, stores and displays them'''
     recieved = current_user().accepted()
     counter = 0;
-    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    searchMatches = [[[None] for x in range(20)] for y in range(100)];
     for person in recieved:
         try:
             searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][6] = current_user().user_dist(person)
             searchMatches[counter][1] = User.query_by_id(person, "email")
             searchMatches[counter][2] = User.query_by_id(person, "phone_number")
             searchMatches[counter][3] = User.query_by_id(person, "bio")
