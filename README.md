@@ -11,7 +11,7 @@ Romance has gone amiss in the world. We find too many failed relationships and b
 ## APIS    
 [IP Geolocation API](https://drive.google.com/open?id=1HakkBtIf4vfPFtvVtO5WR5D-ZR82sdDd60eLKFWOTdw): provides sun&moon data based on location         
 [Ohmanda](https://docs.google.com/document/d/11rfmZNFFGBWkzNi6WDIs9_cVNbSjooQ9WpQKHK1Q5Gw/edit?fbclid=IwAR0oaSlryDedsoILyqXzNAdYbNekerXTkHcC-Bne2eoinXPx4FF1NIoDOxU): provides a daily horoscope based upon sun sign           
-NASA Astronomy of the Day API: displays random astronomy picture for the site 
+NASA Astronomy Picture of the Day API: displays random astronomy picture for the site 
 
 ## Instructions
 To clone repo, use the following in the terminal          
