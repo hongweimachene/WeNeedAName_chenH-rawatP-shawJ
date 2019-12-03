@@ -9,14 +9,16 @@
 <body>
     <h4>Here are the people who you have linked with:</h4><br>
     {% for person in listings %}
-    {%person[0]%}<br>
-    Email: {%person[1]%}<br>
-    Phone Number: {%person[2]%}<br>
-    Bio: {%person[3]%}<br>
-    Location: {%person[4]%}<br>
+    {% if person[5] != [None] %}
+    {{person[0]}}<br>
+    Email: {{person[1]}}<br>
+    Phone Number: {{person[2]}}<br>
+    Bio: {{person[3]}}<br>
+    Location: {{person[4]}}<br>
     <div class="btn-group">
-        <button type="button" class="btn btn-primary" href="/relation?id={%person[5]%}&type=block">Remove</button>
+        <button type="button" class="btn btn-primary" href="/relation?id={{person[5]}}&type=block">Remove</button>
     </div><br><br>
+    {% endif %}
     {% endfor %}
     <p class="lead">
         <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>

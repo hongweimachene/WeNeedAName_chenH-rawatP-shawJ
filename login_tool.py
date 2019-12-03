@@ -15,4 +15,4 @@ def login_required(f):
 
 def current_user():
     if 'username' in session:
-        return User(User.get_by_username('username'))
+        return User(User.get_by_username(session['username']))

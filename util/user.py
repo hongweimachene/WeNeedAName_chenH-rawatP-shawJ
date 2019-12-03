@@ -158,4 +158,5 @@ class User:
             flash("Incorrect password")
             return False
         else:
+            print(fetch)
             return True

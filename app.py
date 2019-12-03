@@ -71,6 +71,8 @@ def authenticate():
     else:
     #Passed all checks, good to login
         session["username"] = username
+        print(session)
+        print(current_user().id)
     if ("prev_url" in session):
         return redirect(session.pop("prev_url"))
     return redirect("/welcome")
@@ -83,7 +85,7 @@ def welcomePage():
     print(f"Ohmanda request: {get_request}")
     print(current_user().dob)
     print(current_user().get_starsign())
-    return render_template("welcome.html", horoscope=json.loads(get_request))
+    return render_template("welcome.html", horoscope=json.loads(get_request), name=current_user().name)
 
 @app.route("/hotsingles")
 @login_required
@@ -190,19 +192,27 @@ def pending_requests():
     session["prev_url"] = "/requests/pending"
     return render_template("pending_requests.html", listings=searchMatches)
 #
-# @app.route("/requests/accepted")
-# @login_required
-# def accepted_requests():
-#     #SQL to get list of people who have requested the current user from the database, as well as their DOBs
-#     #for person in query:
-#         this = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for current user (i just need the DOB)
-#         other = util.matchmaker.Person(YEAR, MONTH, DAY) #Person object for other user
-#         searchMatches[0] = #SQL for other person's name
-#         searchMatches[1] = #SQL for the other person's email
-#         searchMatches[2] = #SQL for the other person's phone number
-#         searchMatches[3] = #SQL for the other person's bio
-#         searchMatches[4] = #SQL for the other person's location
-#     return render_template("accepted_requests.html", listings=searchMatches)
+@app.route("/requests/accepted")
+@login_required
+def accepted_requests():
+    recieved = current_user().accepted()
+    counter = 0;
+    searchMatches = [[[None] for x in range(10)] for y in range(50)];
+    for person in recieved:
+        try:
+            searchMatches[counter][0] = User.query_by_id(person, "name")
+            searchMatches[counter][1] = User.query_by_id(person, "email")
+            searchMatches[counter][2] = User.query_by_id(person, "phone")
+            searchMatches[counter][3] = User.query_by_id(person, "bio")
+            searchMatches[counter][4] = User.query_by_id(person, "address")
+            searchMatches[counter][5] = person
+            counter += 1
+            if(counter > 45 or counter == len(searchMatches) - 1):
+                break;
+        except Exception as e:
+            print(e)
+    session["prev_url"] = "/requests/pending"
+    return render_template("accepted_requests.html", listings=searchMatches)
 
 if __name__ == "__main__":
     util.db_setup()
