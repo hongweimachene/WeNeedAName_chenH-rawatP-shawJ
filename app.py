@@ -236,7 +236,8 @@ def accepted_requests():
 
 @app.route("/location", methods=["GET"])
 @login_required
-def get_my_ip():
+def location():
+    print(api.ip_location(api.user_ip()))
     return current_user().location
 
 if __name__ == "__main__":

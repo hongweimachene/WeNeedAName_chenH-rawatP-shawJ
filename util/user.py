@@ -84,8 +84,9 @@ class User:
                 return "capricorn"
 
     def update_location(self):
+        loc_info = api_request.json2dict(api_request.ip_location(api_request.user_ip()))
         db_ex(f"""UPDATE 'user'
-                  SET location = \"test\"
+                  SET location = \"{loc_info['lat']}, {loc_info['lon']}\"
                   WHERE 'user'.id = \"{self.id}\";""")
 
     # returns a list of user ids of users whom to no request has been sent by the user
