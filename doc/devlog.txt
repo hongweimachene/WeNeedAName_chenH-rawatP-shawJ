@@ -78,6 +78,11 @@ Also redirects to accessed page after creating user
 shawJ -- 2019-11-22 08:30
 Made current_user a template global
 
+chenH -- 2019-11-22 08:35
+Task the Fourth 
+-whenever there is an error and person cannot figure out whats wrong, share with the team to resolve issue
+-communicate effectively, always, we will not keep to ourselves, we will ask clarifying questions 
+
 shawJ -- 2019-11-22 11:30
 Fixed errors with login and implemented authetication through class method
 
