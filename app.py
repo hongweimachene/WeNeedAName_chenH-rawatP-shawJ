@@ -232,6 +232,7 @@ def recieved_requests():
             searchMatches.append(info)
     except Exception as e:
         print(e)
+    session["prev_url"]= "/requests/recieved"
     return render_template("received_requests.html", listings=searchMatches)
 
 @app.route("/requests/pending")
@@ -245,6 +246,7 @@ def pending_requests():
         for person in recieved:
             if(counter > 45):
                 break
+            info = []
             userDOB = current_user().dob.split("-")
             this = util.matchmaker.Person(userDOB[0], userDOB[1], userDOB[2])
             otherDOB = User.query_by_id(person, "dob").split("-")
@@ -264,6 +266,7 @@ def pending_requests():
             searchMatches.append(info)
     except Exception as e:
         print(e)
+    session["prev_url"]= "/requests/pending"
     return render_template("pending_requests.html", listings=searchMatches)
 #
 @app.route("/requests/accepted")
@@ -277,6 +280,7 @@ def accepted_requests():
         for person in recieved:
             if(counter > 45):
                 break
+            info = []
             match = User(person)
             info.append(match.name)
             info.append(match.email)
@@ -288,6 +292,7 @@ def accepted_requests():
             counter += 1
     except Exception as e:
         print(e)
+    session["prev_url"]= "/requests/accepted"
     return render_template("accepted_requests.html", listings=searchMatches)
 
 if __name__ == "__main__":
