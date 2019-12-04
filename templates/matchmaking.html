@@ -7,36 +7,44 @@
     <title>Find your Match!</title>
 </head>
 <body style="background-image: url({{url_for('static', filename='bg2.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
-    <h4>Here are some people who you may want to consider:</h4><br>
-    {% for person in listings %}
-    {% if person[6] != [None] %}
-    {{person[0]}}<br>
-    Distance: {{person[7]}} miles<br>
-    Personality Compatibility:
-    <div class="progress">
-        <div class="progress-bar bg-info" role="progressbar" style="width: {{person[1]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[1]*100}}%</div>
+    <div class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                <br>
+                <h4>Here are some people who you may want to consider:</h4><br>
+                {% for person in listings %}
+                {% if person[6] != [None] %}
+                <b>{{person[0]}}</b><br>
+                Distance: {{person[7]}} miles<br>
+                Personality Compatibility:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[1]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[1]*100}}%</div>
+                </div>
+                Sexual Compatibility:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[2]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[2]*100}}%</div>
+                </div>
+                In-Laws Compatibilty:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[3]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[3]*100}}%</div>
+                </div>
+                Future Success:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[4]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[4]*100}}%</div>
+                </div>
+                Bio: <br>{{person[5]}}<br>
+                <div class="btn-group">
+                    <a href="/relation?id={{person[6]}}&type=pending"><button type="button" class="btn btn-primary">Send Request</button></a>
+                    &nbsp;
+                    <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
+                </div><br><br>
+                {% endif %}
+                {% endfor %}
+                <p class="lead">
+                    <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>
+                </p>
+            </div>
+        </div>
     </div>
-    Sexual Compatibility:
-    <div class="progress">
-        <div class="progress-bar bg-info" role="progressbar" style="width: {{person[2]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[2]*100}}%</div>
-    </div>
-    In-Laws Compatibilty:
-    <div class="progress">
-        <div class="progress-bar bg-info" role="progressbar" style="width: {{person[3]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[3]*100}}%</div>
-    </div>
-    Future Success:
-    <div class="progress">
-        <div class="progress-bar bg-info" role="progressbar" style="width: {{person[4]*100}}%" aria-valuemin="0" aria-valuemax="100">{{person[4]*100}}%</div>
-    </div>
-    Bio: {{person[5]}}<br>
-    <div class="btn-group">
-        <a href="/relation?id={{person[6]}}&type=pending"><button type="button" class="btn btn-primary">Send Request</button></a>
-        <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
-    </div><br><br>
-    {% endif %}
-    {% endfor %}
-    <p class="lead">
-        <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>
-    </p>
 </body>
 </html>
