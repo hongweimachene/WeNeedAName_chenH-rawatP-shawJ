@@ -64,7 +64,7 @@ starsign_compatibilites = {
               "virgo": 70, "libra": 50, "scorpio": 95, "sagittarius": 75,
               "capricorn": 85, "aquarius": 55, "pisces": 80}
 }
-
+#makes current_user a global template variable
 @app.context_processor
 def inject_current_user():
     return dict(current_user = current_user())
@@ -104,9 +104,7 @@ def createAccount():
             print("bad")
             flash("Please enter a value in every field")
             return redirect("/create")
-# new_user(username, password, name, gender, preference, dob, email, phone_number, bio, horoscope_info):
-    # TODO: integrate API for horoscope data"""
-    loc_info = api.json2dict(api.ip_location(api.user_ip()))
+    loc_info = api.json2dict(api.ip_location(api.user_ip())) #current ip location
     if not User.new_user(request.form["username"], request.form["password"], request.form["name"], request.form["gender"], request.form["preference"], request.form["dob"], request.form["email"], request.form["phone"], request.form["bio"], f"{loc_info['lat']},{loc_info['lon']}"):
         return redirect("/create")
     session["username"] = request.form["username"]
@@ -181,7 +179,7 @@ def matchmaking():
     searchMatches.sort(key = lambda x : x[7])
     return render_template("matchmaking.html", listings=searchMatches)
 
-@app.route("/relation")
+@app.route("/relation") #change relations
 @login_required
 def updateRelations():
     userID = request.args["id"]

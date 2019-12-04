@@ -21,6 +21,7 @@ class User:
             self.bio = table_entry[0][9]
             self.location = table_entry[0][10]
 
+    #returns user starsign based on birthday
     def get_starsign(self):
         '''Determines starsign of user based on date of birth'''
         month = int(self.dob[-5:-3])
@@ -86,12 +87,14 @@ class User:
             else:
                 return "capricorn"
 
+    #sets user location to current ip coordinates
     def update_location(self):
         loc_info = api_request.json2dict(api_request.ip_location(api_request.user_ip()))
         db_ex(f"""UPDATE 'user'
                   SET location = \"{loc_info['lat']},{loc_info['lon']}\"
                   WHERE 'user'.id = \"{self.id}\";""")
 
+    #gives the distance in location from another user
     def user_dist(self, other_id):
         other_loc = db_ex(f"SELECT 'user'.location FROM 'user' WHERE 'user'.id=\"{other_id}\";").fetchall()[0][0]
         other_coor = (float(other_loc.split(',')[0]), float(other_loc.split(',')[1]))
@@ -149,6 +152,7 @@ class User:
             ret.append(response[0])
         return ret
 
+        #inserts new user into db - true if successful
     @staticmethod
     def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
@@ -160,6 +164,7 @@ class User:
                    \"{dob}\", \"{email}\", \"{phone_number}\", \"{bio}\", \"{location}\");""")
             return True
 
+    #finds user id by username
     @staticmethod
     def get_by_username(username):
         fetch = db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
@@ -168,6 +173,7 @@ class User:
         else:
             return fetch[0][0]
 
+            #request data from user 
     @staticmethod
     def query_by_id(userID, query):
         fetch = db_ex(f"SELECT {query} FROM 'user' WHERE 'user'.id = {userID};").fetchall()
@@ -175,6 +181,7 @@ class User:
             flash("Username not found, or error with query")
         return fetch[0][0]
 
+        #detirmines if login information is correct
     @staticmethod
     def authenticate_user(username, password):
         fetch = db_ex(f"SELECT password FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
