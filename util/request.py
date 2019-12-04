@@ -14,10 +14,10 @@ class Request:
             self.status = table_entry[0][3]
             self.message = table_entry[0][4]
 
-
+            #inserts a new request into the database
     @staticmethod
     def new_request(sender_id, reciever_id, status, message):
-        '''Function called when user sends a request to another user''' 
+        '''Function called when user sends a request to another user'''
         # if status == "block":
         db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={sender_id} AND 'request'.reciever_id={reciever_id};""")
         db_ex(f"""DELETE FROM 'request' WHERE 'request'.sender_id={reciever_id} AND 'request'.reciever_id={sender_id};""")
@@ -29,11 +29,13 @@ class Request:
               VALUES ({sender_id}, {reciever_id}, \"{status}\", \"{message}\");""")
         return True
 
+        #get all requests sent by a user id
     @staticmethod
     def get_by_sender(sender_id):
         fetch = db_ex(f"SELECT request_id FROM 'request' WHERE 'request'.sender_id=\"{sender_id}\";").fetchall()
         return fetch[0]
 
+        #get all requests not recieved by a user id
     @staticmethod
     def get_by_reciever(reciever_id):
         fetch = db_ex(f"SELECT reciever_id FROM 'request' WHERE 'request'.reciever_id=\"{reciever_id}\";").fetchall()

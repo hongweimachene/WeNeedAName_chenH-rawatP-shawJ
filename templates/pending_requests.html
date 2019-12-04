@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="icon" href="{{url_for('static', filename='Horoscope_dating.png')}}">
     <title>Find your Match!</title>
-  </head>
-  <body>
-      <h4>Here are the people who you have requested:</h4><br>
-      {% for person in listings %}
-      {% if person[6] != [None] %}
-      {{person[0]}}<br>
-      Personality Compatibility: {{person[1]}}<br>
-      Sexual Compatibility: {{person[2]}}<br>
-      In-Laws Compatibilty: {{person[3]}}<br>
-      Future Success: {{person[4]}}<br>
-      Bio: {{person[5]}}<br>
-      <div class="btn-group">
-          <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
-      </div><br><br>
-      {% endif %}
-      {% endfor %}
-      <p class="lead">
-          <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>
-      </p>
-  </body>
+</head>
+<body style="background-image: url({{url_for('static', filename='bg2.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
+    <div class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                <br>
+                <h4>People You Requested:</h4><br>
+                {% for person in listings %}
+                {% if person[6] != [None] %}
+                <b>{{person[0]}}</b><br>
+                Distance: {{person[7]}} miles<br>
+                Star Sign: {{person[8]}}<br>
+                Star Sign Compatibilty:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[9]}}%" aria-valuemin="0" aria-valuemax="100">{{person[9]}}%</div>
+                </div>
+                Personality Compatibility:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[1]}}%" aria-valuemin="0" aria-valuemax="100">{{person[1]}}%</div>
+                </div>
+                Sexual Compatibility:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[2]}}%" aria-valuemin="0" aria-valuemax="100">{{person[2]}}%</div>
+                </div>
+                In-Laws Compatibilty:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[3]}}%" aria-valuemin="0" aria-valuemax="100">{{person[3]}}%</div>
+                </div>
+                Future Success:
+                <div class="progress">
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width:{{person[4]}}%" aria-valuemin="0" aria-valuemax="100">{{person[4]}}%</div>
+                </div>
+                Bio: <br>{{person[5]}}<br>
+                <div class="btn-group">
+                    <a href="/relation?id={{person[6]}}&type=block"><button type="button" class="btn btn-primary">Remove</button></a>
+                </div><br><br>
+                {% endif %}
+                {% endfor %}
+                <p class="lead">
+                    <a class="btn btn-primary" href="/welcome" role="button">Go Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

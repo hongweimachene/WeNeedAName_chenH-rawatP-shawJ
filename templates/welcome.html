@@ -6,40 +6,36 @@
     <meta charset="utf-8">
     <title>StarCrossed</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="background-image: url({{url_for('static', filename='bg2.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: url({{url_for('static', filename='bg2.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
         <a class="navbar-brand">StarCrossed</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/hotsingles">Shoot Your Shot</a>
+                    <a class="nav-link" href="/hotsingles">Shot Your Shot!</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/requests/recieved">People Into You</a>
+                    <a class="nav-link" href="/requests/pending">Pending</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/requests/pending">People You've Requested</a>
+                    <a class="nav-link" href="/requests/recieved">Received</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/requests/accepted">People You've Linked With</a>
+                    <a class="nav-link" href="/requests/accepted">Accepted</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image: url({{url_for('static', filename='bg2.jpg')}}); background-size: 100% 100%; background-attachment: fixed;">
         <h2 class="display-4">Welcome to StarCrossed, {{name}}!</h2>
         <p class="lead">Here are some information you may be interested in!</p>
         <hr class="my-4">
         <p>Daily Horoscope: {{horoscope['sign'].capitalize()}} {{horoscope['date']}}<br>
             {{horoscope['horoscope']}}
         </p><br>
-
-<!-- Need to decide which is better -->
-        <p>Click here to <a href="/hotsingles">find your match</a></p>
-        <p>Click here to <a href="/hotsingles">shoot your shot</a></p>
-        <p>Click here to <a href="/requests/recieved">see who's into you</a></p>
-        <p>Click here to <a href="/requests/pending">view people you've requested</a></p>
-        <p>Click here to <a href="/requests/accepted">see the people you've linked with</a></p>
         <p class="lead">
             <a class="btn btn-primary" href="/logout" role="button">Logout</a>
         </p>

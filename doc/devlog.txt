@@ -102,6 +102,9 @@ Created request class with class methods
 yifanW -- 2019-11-25 05:22
 Added gender and sexual orientation
 
+shawJ -- 2019-11-25 08:17
+Created routes for viewing requests
+
 prathamR -- 2019-11-25 08:21
 Add matchmaker file and Person class
 
@@ -128,6 +131,12 @@ HOME STRETCH PLAN
   things to add if time:
   - send message w/ request
   - delete account
+  
+shawJ -- 2019-11-25 8:32
+Populated database, bug fixes
+ 
+shawJ -- 2019-11-25 13:22
+Gave user method for calculating star sign
 
 prathamR -- 2019-11-25 19:37
 Create routing for matchmaking page
@@ -156,6 +165,12 @@ deleted start html file
 chenH -- 2019-11-26 08:40
 updated design doc to match current APIS, added the Skyfield module, removed APIs we aren't using and updated component map
 
+shawJ -- 2019-11-26 17:20
+Made query and methods to find unrequested users
+
+shawJ -- 2019-11-27 08:37
+Added more user methods
+
 prathamR -- 2019-11-26 08:42
 Update welcome page with links
 
@@ -167,6 +182,9 @@ Updated received requests html
 
 yifanW -- 2019-11-27 13:15
 fixed error with loading images
+
+shawJ -- 2019-11-27 13:35
+Implemented json parsing
 
 prathamR -- 2019-12-01 23:00
 Fix showing potential matches backend (at least with displaying only)
@@ -200,3 +218,57 @@ Add file to add random users to the database
 
 prathamR -- 2019-12-03 01:01
 Implement APOD
+
+chenH -- 2019-12-03 01:30
+added comments to most .py script functions and classes
+
+shawJ -- 2019-12-03 01:34
+used IP API to calculate coordinates
+
+shawJ -- 2019-12-03 01:50
+update user coordinates on login
+
+shawJ -- 2019-12-03 02:20
+used geopy to find user distances
+
+yifanW -- 2019-12-03 05:51
+reformatted welcome page
+
+prathamR -- 2019-12-03 08:52
+Update with distance from users, and fix errors with database, and random user creation script
+
+shawJ -- 2019-12-03 10:05
+improved user generator
+
+shawJ -- 2019-12-03 12:06
+made sure matches alligned with gender and sexual preferences
+
+shawJ -- 2019-12-03 4:35
+code cleanup 
+
+shawJ -- 2019-12-03 6:08
+sort matches by distance
+
+yifanW -- 2019-12-03 21:23
+updated webpages
+
+shawJ -- 2019-12-03 22:32
+added starsign compatibilities
+
+yifanW -- 2019-12-03 23:05
+formatted matchmaking page
+
+yifanW -- 2019-12-04 00:38
+fixed features in all request pages
+
+yifanW -- 2019-12-04 01:28
+added features to createAccounts and welcome pages
+
+yifanW -- 2019-12-04 01:32
+added star sign and star sign compatibility
+
+yifanW -- 2019-12-04 01:43
+fixed compatibilities 
+
+yifanW -- 2019-12-04 02:17
+edited distance

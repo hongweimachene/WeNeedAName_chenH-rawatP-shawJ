@@ -1,5 +1,6 @@
-from util import db_ex, request
+from util import db_ex, request, api_request
 from flask import flash
+import geopy.distance
 
 '''User class to store user data easier into database'''
 class User:
@@ -20,6 +21,7 @@ class User:
             self.bio = table_entry[0][9]
             self.location = table_entry[0][10]
 
+    #returns user starsign based on birthday
     def get_starsign(self):
         '''Determines starsign of user based on date of birth'''
         month = int(self.dob[-5:-3])
@@ -85,6 +87,21 @@ class User:
             else:
                 return "capricorn"
 
+    #sets user location to current ip coordinates
+    def update_location(self):
+        loc_info = api_request.json2dict(api_request.ip_location(api_request.user_ip()))
+        db_ex(f"""UPDATE 'user'
+                  SET location = \"{loc_info['lat']},{loc_info['lon']}\"
+                  WHERE 'user'.id = \"{self.id}\";""")
+
+    #gives the distance in location from another user
+    def user_dist(self, other_id):
+        other_loc = db_ex(f"SELECT 'user'.location FROM 'user' WHERE 'user'.id=\"{other_id}\";").fetchall()[0][0]
+        other_coor = (float(other_loc.split(',')[0]), float(other_loc.split(',')[1]))
+        self_coor = (float(self.location.split(',')[0]), float(self.location.split(',')[1]))
+        return geopy.distance.distance(other_coor, self_coor).miles
+
+
     # returns a list of user ids of users whom to no request has been sent by the user
     # and whom have not sent a request to the user
     def unmatched(self):
@@ -93,8 +110,19 @@ class User:
         (SELECT sender_id FROM 'request' WHERE 'request'.reciever_id = {self.id}
         UNION SELECT reciever_id FROM 'request' WHERE 'request'.sender_id = {self.id});""").fetchall()
         ret = []
+        print(self.preference)
         for response in query:
             ret.append(response[0])
+        if self.preference == "Males":
+            ret = filter(lambda id : db_ex(f"""SELECT gender FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] == "Male", ret)
+            print("males only uwu")
+        elif self.preference == "Females":
+            ret = filter(lambda id : db_ex(f"""SELECT gender FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] == "Female", ret)
+            print("females only uwu")
+        if self.gender == "Male":
+            ret = filter(lambda id : db_ex(f"""SELECT preference FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] != "Females", ret)
+        if self.gender == "Female":
+            ret = filter(lambda id : db_ex(f"""SELECT preference FROM 'user' WHERE 'user'.id = {id};""").fetchall()[0][0] != "Males", ret)
         return ret
 
     #returns request ids of pending requests sent by user
@@ -124,6 +152,7 @@ class User:
             ret.append(response[0])
         return ret
 
+        #inserts new user into db - true if successful
     @staticmethod
     def new_user(username, password, name, gender, preference, dob, email, phone_number, bio, location):
         if len(db_ex(f"SELECT * FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()) > 0:
@@ -135,6 +164,7 @@ class User:
                    \"{dob}\", \"{email}\", \"{phone_number}\", \"{bio}\", \"{location}\");""")
             return True
 
+    #finds user id by username
     @staticmethod
     def get_by_username(username):
         fetch = db_ex(f"SELECT id FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
@@ -143,6 +173,7 @@ class User:
         else:
             return fetch[0][0]
 
+            #request data from user 
     @staticmethod
     def query_by_id(userID, query):
         fetch = db_ex(f"SELECT {query} FROM 'user' WHERE 'user'.id = {userID};").fetchall()
@@ -150,6 +181,7 @@ class User:
             flash("Username not found, or error with query")
         return fetch[0][0]
 
+        #detirmines if login information is correct
     @staticmethod
     def authenticate_user(username, password):
         fetch = db_ex(f"SELECT password FROM 'user' WHERE 'user'.username=\"{username}\";").fetchall()
