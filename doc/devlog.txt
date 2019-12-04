@@ -263,3 +263,6 @@ fixed features in all request pages
 
 yifanW -- 2019-12-04 01:28
 added features to createAccounts and welcome pages
+
+yifanW -- 2019-12-04 01:32
+added star sign and star sign compatibility
