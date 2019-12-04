@@ -223,7 +223,7 @@ def recieved_requests():
             info.append(round((util.matchmaker.sexualCompatibility(this, other))*100))
             info.append(round((util.matchmaker.inLawsCompatibility(this, other))*100))
             info.append(round((util.matchmaker.futureSuccess(this, other))*100))
-            info.append(other_person.bio)
+            info.append(other_user.bio)
             info.append(person)
             info.append(round(current_user().user_dist(person)))
             info.append(other_user.get_starsign().capitalize())
@@ -296,7 +296,7 @@ def accepted_requests():
     return render_template("accepted_requests.html", listings=searchMatches)
 
 if __name__ == "__main__":
-    util.db_setup()
-    randomUsers.populate()
+    #util.db_setup()
+    #randomUsers.populate()
     app.debug = True
     app.run()
