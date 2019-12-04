@@ -296,7 +296,7 @@ def accepted_requests():
     return render_template("accepted_requests.html", listings=searchMatches)
 
 if __name__ == "__main__":
-    util.db_setup()
-    randomUsers.populate()
+    #util.db_setup()
+    #randomUsers.populate()
     app.debug = True
     app.run()
