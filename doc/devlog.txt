@@ -251,3 +251,6 @@ sort matches by distance
 
 yifanW -- 2019-12-03 21:23
 updated webpages
+
+shawJ -- 2019-12-03 22:32
+added starsign compatibilities
