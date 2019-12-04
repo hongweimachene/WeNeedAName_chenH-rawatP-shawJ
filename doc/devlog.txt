@@ -269,3 +269,6 @@ added star sign and star sign compatibility
 
 yifanW -- 2019-12-04 01:43
 fixed compatibilities 
+
+yifanW -- 2019-12-04 02:17
+edited distance

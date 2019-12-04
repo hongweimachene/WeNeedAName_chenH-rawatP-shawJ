@@ -169,7 +169,7 @@ def matchmaking():
         info.append(round((util.matchmaker.futureSuccess(this, other))*100))
         info.append(other_user.bio)
         info.append(person)
-        info.append(current_user().user_dist(person))
+        info.append(round(current_user().user_dist(person)))
         info.append(other_user.get_starsign().capitalize())
         info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
         counter += 1
@@ -219,13 +219,13 @@ def recieved_requests():
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
             other_user = User(person)
             info.append(other_user.name)
-            info.append(util.matchmaker.personalityCompatibility(this, other))
-            info.append(util.matchmaker.sexualCompatibility(this, other))
-            info.append(util.matchmaker.inLawsCompatibility(this, other))
-            info.append(util.matchmaker.futureSuccess(this, other))
+            info.append(round((util.matchmaker.personalityCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.sexualCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.inLawsCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.futureSuccess(this, other))*100))
             info.append(other_person.bio)
             info.append(person)
-            info.append(current_user().user_dist(person))
+            info.append(round(current_user().user_dist(person)))
             info.append(other_user.get_starsign().capitalize())
             info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
             counter += 1
@@ -253,13 +253,13 @@ def pending_requests():
             other = util.matchmaker.Person(otherDOB[0], otherDOB[1], otherDOB[2]) #Person object for other user
             other_user = User(person)
             info.append(other_user.name)
-            info.append(util.matchmaker.personalityCompatibility(this, other))
-            info.append(util.matchmaker.sexualCompatibility(this, other))
-            info.append(util.matchmaker.inLawsCompatibility(this, other))
-            info.append(util.matchmaker.futureSuccess(this, other))
+            info.append(round((util.matchmaker.personalityCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.sexualCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.inLawsCompatibility(this, other))*100))
+            info.append(round((util.matchmaker.futureSuccess(this, other))*100))
             info.append(other_user.bio)
             info.append(person)
-            info.append(current_user().user_dist(person))
+            info.append(round(current_user().user_dist(person)))
             info.append(other_user.get_starsign().capitalize())
             info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
             counter += 1
@@ -288,7 +288,7 @@ def accepted_requests():
             info.append(match.bio)
             info.append(match.location)
             info.append(person)
-            info.append(current_user().user_dist(person))
+            info.append(round(current_user().user_dist(person)))
             counter += 1
     except Exception as e:
         print(e)
