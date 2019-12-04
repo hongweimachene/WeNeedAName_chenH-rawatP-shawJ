@@ -274,7 +274,7 @@ def pending_requests():
 def accepted_requests():
     '''This function handles requests from the user that have been accepted from another user, stores and displays them'''
     recieved = current_user().accepted()
-    counter = 0;
+    counter = 0
     searchMatches = []
     try:
         for person in recieved:
@@ -290,6 +290,7 @@ def accepted_requests():
             info.append(person)
             info.append(round(current_user().user_dist(person)))
             counter += 1
+            searchMatches.append(info)
     except Exception as e:
         print(e)
     session["prev_url"]= "/requests/accepted"
