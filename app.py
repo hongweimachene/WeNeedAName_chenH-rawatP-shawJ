@@ -177,6 +177,7 @@ def matchmaking():
         # except Exception as e:
         #     print(e)
     searchMatches.sort(key = lambda x : x[7])
+    session["prev_url"] = "/hotsingles"
     return render_template("matchmaking.html", listings=searchMatches)
 
 @app.route("/relation") #change relations
