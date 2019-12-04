@@ -4,6 +4,7 @@ from util.user import User
 
 
 def login_required(f):
+    '''Login function'''
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'username' in session:
