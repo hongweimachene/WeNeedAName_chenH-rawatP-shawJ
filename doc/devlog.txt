@@ -277,3 +277,6 @@ fixed compatibilities
 
 yifanW -- 2019-12-04 02:17
 edited distance
+
+yifanW -- 2019-12-04 03:35
+changed displayed info in accepted page
