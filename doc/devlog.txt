@@ -260,3 +260,6 @@ formatted matchmaking page
 
 yifanW -- 2019-12-04 00:38
 fixed features in all request pages
+
+yifanW -- 2019-12-04 01:28
+added features to createAccounts and welcome pages
