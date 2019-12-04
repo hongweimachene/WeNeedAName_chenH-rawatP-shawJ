@@ -183,6 +183,7 @@ def matchmaking():
 @app.route("/relation") #change relations
 @login_required
 def updateRelations():
+    '''Refreshes page and updates database'''
     userID = request.args["id"]
     newRelation = request.args["type"]
     Request.new_request(current_user().id, userID, newRelation, "")
@@ -191,6 +192,7 @@ def updateRelations():
 @app.route("/logout")
 @login_required
 def logout():
+    '''Logs the user out'''
     if("username" in session):
         session.clear()
         flash("Successfully Logged Out")
@@ -199,6 +201,7 @@ def logout():
 @app.route("/requests")
 @login_required
 def requests():
+    '''Sends user to requests page'''
     return redirect("/requests/recieved")
 
 @app.route("/requests/recieved")
