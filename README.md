@@ -1,6 +1,6 @@
 # Star-Crossed by WeNeedAName
 
-Hong Wei Chen: Project Manager, Frontend   
+Hong Wei Chen: Project Manager    
 Pratham Rawat: Backend (database and API work)   
 Justin Shaw: Backend (database and API work)      
 Yifan Wang: Frontend (html pages and Bootstrap)   
