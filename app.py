@@ -25,6 +25,46 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 #b# ========================================================================
 #b# Site Interaction
+
+starsign_compatibilites = {
+    "aries": {"aries": 60, "taurus": 65, "gemini": 65, "cancer": 65, "leo": 90,
+              "virgo": 45, "libra": 70, "scorpio": 80, "sagittarius": 90,
+              "capricorn": 50, "aquarius": 55, "pisces": 65},
+    "taurus": {"aries": 60, "taurus": 70, "gemini": 70, "cancer": 80, "leo": 70,
+              "virgo": 90, "libra": 75, "scorpio": 85, "sagittarius": 50,
+              "capricorn": 95, "aquarius": 80, "pisces": 85},
+    "gemini": {"aries": 70, "taurus": 70, "gemini": 75, "cancer": 60, "leo": 80,
+              "virgo": 75, "libra": 90, "scorpio": 60, "sagittarius": 75,
+              "capricorn": 50, "aquarius": 90, "pisces": 50},
+    "cancer": {"aries": 65, "taurus": 80, "gemini": 60, "cancer": 75, "leo": 70,
+              "virgo": 75, "libra": 60, "scorpio": 95, "sagittarius": 55,
+              "capricorn": 45, "aquarius": 70, "pisces": 90},
+    "leo": {"aries": 90, "taurus": 70, "gemini": 80, "cancer": 70, "leo": 85,
+              "virgo": 75, "libra": 65, "scorpio": 75, "sagittarius": 95,
+              "capricorn": 45, "aquarius": 70, "pisces": 75},
+    "virgo": {"aries": 45, "taurus": 90, "gemini": 75, "cancer": 75, "leo": 75,
+              "virgo": 70, "libra": 80, "scorpio": 85, "sagittarius": 70,
+              "capricorn": 95, "aquarius": 50, "pisces": 70},
+    "libra": {"aries": 70, "taurus": 75, "gemini": 90, "cancer": 60, "leo": 65,
+              "virgo": 80, "libra": 80, "scorpio": 85, "sagittarius": 80,
+              "capricorn": 85, "aquarius": 95, "pisces": 50},
+    "scorpio": {"aries": 80, "taurus": 85, "gemini": 60, "cancer": 95, "leo": 70,
+              "virgo": 85, "libra": 85, "scorpio": 90, "sagittarius": 80,
+              "capricorn": 65, "aquarius": 60, "pisces": 95},
+    "sagittarius": {"aries": 90, "taurus": 50, "gemini": 75, "cancer": 55, "leo": 95,
+              "virgo": 70, "libra": 80, "scorpio": 85, "sagittarius": 85,
+              "capricorn": 55, "aquarius": 60, "pisces": 75},
+    "capricorn": {"aries": 50, "taurus": 95, "gemini": 50, "cancer": 45, "leo": 45,
+              "virgo": 95, "libra": 85, "scorpio": 65, "sagittarius": 55,
+              "capricorn": 85, "aquarius": 70, "pisces": 85},
+    "aquarius": {"aries": 55, "taurus": 80, "gemini": 90, "cancer": 70, "leo": 70,
+              "virgo": 50, "libra": 95, "scorpio": 60, "sagittarius": 60,
+              "capricorn": 70, "aquarius": 80, "pisces": 55},
+    "pisces": {"aries": 65, "taurus": 85, "gemini": 50, "cancer": 90, "leo": 75,
+              "virgo": 70, "libra": 50, "scorpio": 95, "sagittarius": 75,
+              "capricorn": 85, "aquarius": 55, "pisces": 80}
+}
+
 @app.context_processor
 def inject_current_user():
     return dict(current_user = current_user())
@@ -132,6 +172,8 @@ def matchmaking():
         info.append(other_user.bio)
         info.append(person)
         info.append(current_user().user_dist(person))
+        info.append(other_user.get_starsign().capitalize())
+        info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
         counter += 1
         searchMatches.append(info)
         # except Exception as e:
@@ -185,6 +227,8 @@ def recieved_requests():
             info.append(other_person.bio)
             info.append(person)
             info.append(current_user().user_dist(person))
+            info.append(other_user.get_starsign().capitalize())
+            info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
             counter += 1
             searchMatches.append(info)
     except Exception as e:
@@ -215,6 +259,8 @@ def pending_requests():
             info.append(other_user.bio)
             info.append(person)
             info.append(current_user().user_dist(person))
+            info.append(other_user.get_starsign().capitalize())
+            info.append(starsign_compatibilites[current_user().get_starsign()][other_user.get_starsign()])
             counter += 1
             searchMatches.append(info)
     except Exception as e:
