@@ -6,7 +6,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.3
 jplephem==2.9
 MarkupSafe==1.1.1
-numpy==1.17.4
+numpy==1.22.0
 sgp4==1.4
 skyfield==1.15
 urllib3==1.25.7
